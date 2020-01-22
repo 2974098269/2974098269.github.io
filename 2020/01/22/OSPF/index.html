@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>网络基础</title>
+  <meta name="author" content="Wenpeng Huang">
+
+  
+  <meta name="description" content="OSPF路由协议">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="网络基础">
+
+  
+  
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="网络基础" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">网络基础</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-22T07:39:03.067Z"><a href="/2020/01/22/OSPF/">2020-01-22</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="OSPF路由协议"><a href="#OSPF路由协议" class="headerlink" title="OSPF路由协议"></a>OSPF路由协议</h1><a id="more"></a>
+
+<h4 id="一、OSPF概述"><a href="#一、OSPF概述" class="headerlink" title="一、OSPF概述"></a>一、OSPF概述</h4><p>通过交换hello数据包来创建邻居关系，以传播LSA代替路由更新。</p>
+<p>封装IP头部协议字段：88eigrp  89ospf<br>工业标准，工作在IP网络<br>组播地址：224.0.0.5  224.0.0.6<br>链路状态型的路由</p>
+<h4 id="二、链路状态路由协议"><a href="#二、链路状态路由协议" class="headerlink" title="二、链路状态路由协议"></a>二、链路状态路由协议</h4><p>邻居表 ：</p>
+<p>拓扑数据表</p>
+<p>路由表</p>
+<h4 id="三、OSPF分层路由"><a href="#三、OSPF分层路由" class="headerlink" title="三、OSPF分层路由"></a>三、OSPF分层路由</h4><p>AB：主干区域</p>
+<p>CDB：区域便捷而路由器</p>
+<p>FGH：常规路由器</p>
+<p>ASBR：自治系统边界路由器</p>
+<h4 id="五、OSPF邻居状态"><a href="#五、OSPF邻居状态" class="headerlink" title="五、OSPF邻居状态"></a>五、OSPF邻居状态</h4><p>1、邻居关系：Hello数据包<br>可使用命令debug ip ospf adj查看邻居建立的详细过程</p>
+<h5 id="down-："><a href="#down-：" class="headerlink" title="down ："></a><strong>down</strong> ：</h5><p>路由器A刚启动时，ospf处于down的状态，因为它还没有与其他路由器交换信息。它使用组播地址224.0.0.5发送hello分组。 </p>
+<h5 id="init-："><a href="#init-：" class="headerlink" title="init ："></a><strong>init</strong> ：</h5><p>所有运行ospf的路由器收到A的hello分组时，将A加入邻居列表中，这是init状态。</p>
+<h5 id="2way-："><a href="#2way-：" class="headerlink" title="2way ："></a><strong>2way</strong> ：</h5><p>收到A的hello的路由器都向A发送单播应答，A收到后，将这些路由器加入邻居列表，所有路由器都建立了双向关系，进入了2way状态。</p>
+<h5 id="Exstart-："><a href="#Exstart-：" class="headerlink" title="Exstart ："></a><strong>Exstart</strong> ：</h5><p>如果链路类型是广播网络（如以太网），接下来必须选举DR和BDR，选举结束后，路由器处于预启动Exstart状态。</p>
+<h5 id="Exchange-："><a href="#Exchange-：" class="headerlink" title="Exchange ："></a><strong>Exchange</strong> ：</h5><p>然后交换链路状态数据库摘要，也就是交换DBD，这是Exchange状态。 </p>
+<h5 id="Loading-："><a href="#Loading-：" class="headerlink" title="Loading ："></a><strong>Loading</strong> ：</h5><p> DBD交换完毕后进入Loading状态  </p>
+<h5 id="Full-："><a href="#Full-：" class="headerlink" title="Full ："></a><strong>Full</strong> ：</h5><p>路由器根据DBD发送LSR请求更新链路状态条目，对方用LSU进行响应。至此，双方都学到了路由条目，database完整，就是Full状态。</p>
+<h4 id="六、最短路径优先算法（SPF-Calculation）"><a href="#六、最短路径优先算法（SPF-Calculation）" class="headerlink" title="六、最短路径优先算法（SPF Calculation）"></a><strong>六、最短路径优先算法（SPF Calculation）</strong></h4><p>metric值=所有目的地址到达本地路由器的入接口的cost值之和<br>metric值=所有本地路由器到达目的地址的路由器的出接口的cost值之和<br>也可以使用命令sh ip ospf interface loopback 0 查看接口的cost值 </p>
+<h4 id="七、使用OSPF配置负载均衡"><a href="#七、使用OSPF配置负载均衡" class="headerlink" title="七、使用OSPF配置负载均衡"></a>七、使用OSPF配置负载均衡</h4><p>ip  ospf  cost   value（修改cost值）</p>
+<h4 id="八、配置OSPF身份验证"><a href="#八、配置OSPF身份验证" class="headerlink" title="八、配置OSPF身份验证"></a>八、配置OSPF身份验证</h4><h5 id="（1）配置明文认证"><a href="#（1）配置明文认证" class="headerlink" title="（1）配置明文认证"></a>（1）配置明文认证</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1(config-if)#ip ospf authentication-key ccie   设置明文密码，两端口密码要一致</span><br><span class="line">R1(config-if)#ip ospf authentication     开启认证</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）配置密码认证"><a href="#（2）配置密码认证" class="headerlink" title="（2）配置密码认证"></a>（2）配置密码认证</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1(config-if)#ip ospf message-digest-key 1 md5 ccie</span><br><span class="line">R1(config-if)#ip ospf authentication</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）配置区域认证"><a href="#（3）配置区域认证" class="headerlink" title="（3）配置区域认证"></a>（3）配置区域认证</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1(config-if)#ip ospf message-digest-key 1 md5 ccie</span><br><span class="line">R1(config-router)#area 1 authentication message-digest</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/01/22/路由重分布/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/IDS,IPS/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/NAT/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/OSPF/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/动态路由协议-RIP/"></a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
+  
+    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 Wenpeng Huang
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

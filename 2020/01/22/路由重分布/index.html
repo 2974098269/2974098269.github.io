@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>网络基础</title>
+  <meta name="author" content="Wenpeng Huang">
+
+  
+  <meta name="description" content="路由重分布与路径控制">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="网络基础">
+
+  
+  
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="网络基础" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">网络基础</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-22T07:52:20.210Z"><a href="/2020/01/22/路由重分布/">2020-01-22</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="路由重分布与路径控制"><a href="#路由重分布与路径控制" class="headerlink" title="路由重分布与路径控制"></a><strong>路由重分布与路径控制</strong></h1><a id="more"></a>
+
+<h3 id="路径控制概述"><a href="#路径控制概述" class="headerlink" title="路径控制概述"></a>路径控制概述</h3><p>​         为了保证网络的高效运行及在路由重分布的时候避免次优路由或者路由环路，有必要对路由更新进行控制，常用的方法有被动接口、默认路由、静态路由、路由映射表、分布列表、前缀列表、偏移列表、Cisco IOS IP服务等级协议（SLA）和策略路由。在进行路由控制时，可能是多种方法进行组合。  </p>
+<h4 id="路由映射表"><a href="#路由映射表" class="headerlink" title="路由映射表"></a>路由映射表</h4><p>可以做复杂的访问控制列表，主要功能包括路由控制和策略路由等。  </p>
+<h5 id="定义路由映射表"><a href="#定义路由映射表" class="headerlink" title="定义路由映射表"></a>定义路由映射表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route-map map-tag [permit | deny] [sequence-number]</span><br></pre></td></tr></table></figure>
+
+<p>如果格式为：match ip address a b c   表示逻辑或，只要有一个条件满足即可</p>
+<p>如果格式为：match ip address a </p>
+<p>match ip address b </p>
+<p>match ip address c     表示逻辑与，必须同时满足所有条件</p>
+<h5 id="条件匹配：macth"><a href="#条件匹配：macth" class="headerlink" title="条件匹配：macth"></a>条件匹配：macth</h5><p>macth（常用的匹配条件包括IP地址、接口、度量值、tag、路由类型以及数据包长度等）  </p>
+<h5 id="定义行为：set"><a href="#定义行为：set" class="headerlink" title="定义行为：set"></a>定义行为：set</h5><table>
+<thead>
+<tr>
+<th>Set行为</th>
+<th align="center"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set ip next  hop</td>
+<td align="center">设定数据包的下一跳地址</td>
+</tr>
+<tr>
+<td>set interface</td>
+<td align="center">设定数据包出接口</td>
+</tr>
+<tr>
+<td>set ip default  next hop</td>
+<td align="center">设置默认的下一跳地址，用于当路由表里没有达到目的地址路由条目的时候</td>
+</tr>
+<tr>
+<td>set ip tos</td>
+<td align="center">设定IP数据包的TOS值</td>
+</tr>
+<tr>
+<td>set ip  precedence</td>
+<td align="center">设定IP数据包的优先级</td>
+</tr>
+<tr>
+<td>Set metric</td>
+<td align="center">设置路由的度量值</td>
+</tr>
+<tr>
+<td>set tag</td>
+<td align="center">设定路由的标记值</td>
+</tr>
+</tbody></table>
+<h5 id="应用到路由协议中"><a href="#应用到路由协议中" class="headerlink" title="应用到路由协议中"></a>应用到路由协议中</h5><h4 id="路由映射表特征"><a href="#路由映射表特征" class="headerlink" title="路由映射表特征"></a>路由映射表特征</h4><p>A.一个route map末尾默认行为是“deny any”</p>
+<p>  如执行策略路由时，没有匹配则正常转发</p>
+<p>  如路由重分时，没有匹配则被过滤掉</p>
+<p>B.一个route map可以包含多个route map陈述，从上到下被执行，如route map陈述中没有math，则匹配所有。</p>
+<p>C.序列号指定了条件执行的顺序，不写默认为10，不会自动递增</p>
+<p>D.route map中不写permit deny默认为permit</p>
+<p>E.在删除route map时，没写编号则删除整个route map</p>
+<h4 id="策略路由"><a href="#策略路由" class="headerlink" title="策略路由"></a>策略路由</h4><p>策略路由提供了一种根据网络管理者制定的策略来进行数据包转发的机制。基于策略的路由比传统路由能力更强，使用灵活，它使网络管理者不仅能够根据目的地址，而且能够根据协议类型、报文大小、应用或IP源地址来选择转发路径。策略由路由映射表来定义。</p>
+<h4 id="VPN隧道：虚拟专用网"><a href="#VPN隧道：虚拟专用网" class="headerlink" title="VPN隧道：虚拟专用网"></a>VPN隧道：虚拟专用网</h4><p>GRE隧道：支持加密，支持组播和广播(路由协议)</p>
+<p>IPSEC隧道:支持加密</p>
+<p>不支持组播和广播和GRE流量</p>
+<h5 id="R1"><a href="#R1" class="headerlink" title="R1:"></a>R1:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 10</span><br><span class="line">ip add 10.1.1.1 255.255.255.0</span><br><span class="line">tunnel source f0/0</span><br><span class="line">tunnel destination 23.1.1.2</span><br><span class="line">ip route 192.168.0.0 255.255.0.0 10.1.1.2</span><br></pre></td></tr></table></figure>
+
+<h5 id="R2："><a href="#R2：" class="headerlink" title="R2："></a>R2：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface tunnel 10</span><br><span class="line">ip add 10.1.1.2 255.255.255.0</span><br><span class="line">tunnel source f0/1</span><br><span class="line">tunnel destination 12.1.1.1</span><br><span class="line">ip route 172.16.0.0 255.255.0.0 10.1.1.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="PPP与HDLC"><a href="#PPP与HDLC" class="headerlink" title="PPP与HDLC"></a>PPP与HDLC</h4><p>PAP：密码验证协议：利用两次握手的简单方法进行认证</p>
+<h5 id="单向认证：R1"><a href="#单向认证：R1" class="headerlink" title="单向认证：R1:"></a>单向认证：R1:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">username aaa password 123</span><br><span class="line"></span><br><span class="line">int s0/1/2</span><br><span class="line"></span><br><span class="line">ppp  authentication pap</span><br></pre></td></tr></table></figure>
+
+<h5 id="R2"><a href="#R2" class="headerlink" title="R2:"></a>R2:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int s0/1/1</span><br><span class="line"></span><br><span class="line">ppp pap sent-username  aaa password 123</span><br></pre></td></tr></table></figure>
+
+<h4 id="CHAP-询问握手验证协议："><a href="#CHAP-询问握手验证协议：" class="headerlink" title="CHAP-询问握手验证协议："></a>CHAP-询问握手验证协议：</h4><p>利用三次握手周期地验证源节点的身份。</p>
+<p>CHAP双向认证</p>
+<h5 id="R1-1"><a href="#R1-1" class="headerlink" title="R1:"></a>R1:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">username R2 password 123</span><br><span class="line">int s0/2/1</span><br><span class="line">encapsulatetion ppp</span><br><span class="line">ppp authentication chap</span><br></pre></td></tr></table></figure>
+
+<h5 id="R2：-1"><a href="#R2：-1" class="headerlink" title="R2："></a>R2：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">username R1 password 123</span><br><span class="line">int s0/3/0</span><br><span class="line">encapsulation ppp</span><br><span class="line">ppp authentication chap</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/01/22/路由重分布/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/IDS,IPS/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/NAT/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/OSPF/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/动态路由协议-RIP/"></a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
+  
+    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 Wenpeng Huang
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

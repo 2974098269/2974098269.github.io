@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>网络基础</title>
+  <meta name="author" content="Wenpeng Huang">
+
+  
+  <meta name="description" content="IDS和IPS">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="网络基础">
+
+  
+  
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="网络基础" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">网络基础</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-22T07:50:47.347Z"><a href="/2020/01/22/IDS,IPS/">2020-01-22</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="IDS和IPS"><a href="#IDS和IPS" class="headerlink" title="IDS和IPS"></a>IDS和IPS</h2><a id="more"></a>
+
+<h3 id="IDS"><a href="#IDS" class="headerlink" title="IDS:"></a>IDS:</h3><p>入侵检测系统</p>
+<p>是防火墙的重要补充</p>
+<p>构建网络安全防御体系重要环节</p>
+<p>克服传统防御机制的限制</p>
+<h5 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h5><p>监测并分析用户系统的活动</p>
+<p>核查系统配置和漏洞</p>
+<p>对操作系统进行日志管理，并识别违反安全策略的用户活动</p>
+<p>针对已发现的攻击行为做出适当的反应，如告警，终止进程等</p>
+<h4 id="入侵监测系统-的分类"><a href="#入侵监测系统-的分类" class="headerlink" title="入侵监测系统 的分类"></a>入侵监测系统 的分类</h4><h5 id="按入侵检测形态"><a href="#按入侵检测形态" class="headerlink" title="按入侵检测形态"></a>按入侵检测形态</h5><p>硬件入侵监测</p>
+<p>软件入侵监测</p>
+<h5 id="按目标系统的类型"><a href="#按目标系统的类型" class="headerlink" title="按目标系统的类型"></a>按目标系统的类型</h5><p>网络入侵监测（NIDS、network）</p>
+<p>IDS可以放在防火墙或者网关后面，以网络嗅探器的形式捕获所有的对内对外的数据包</p>
+<p>主机入侵监测（HIDS、host）</p>
+<p>安全操作系统必须具备一定的审计功能，并记录相应的安全性日志</p>
+<p>基于内核</p>
+<p>基于应用</p>
+<h5 id="按系统结构"><a href="#按系统结构" class="headerlink" title="按系统结构"></a>按系统结构</h5><p>集中式</p>
+<p>分布式</p>
+<h4 id="入侵监测的技术架构"><a href="#入侵监测的技术架构" class="headerlink" title="入侵监测的技术架构"></a>入侵监测的技术架构</h4><h5 id="事件产生器："><a href="#事件产生器：" class="headerlink" title="事件产生器："></a>事件产生器：</h5><p>采集和监事被保护系统的数据</p>
+<h5 id="事件分析器："><a href="#事件分析器：" class="headerlink" title="事件分析器："></a>事件分析器：</h5><p>分析数据、发现危险、异常事件、通知响应单元</p>
+<h5 id="响应单元："><a href="#响应单元：" class="headerlink" title="响应单元："></a>响应单元：</h5><p>对分析结果做出反应</p>
+<h5 id="事件数据库："><a href="#事件数据库：" class="headerlink" title="事件数据库："></a>事件数据库：</h5><p>存放各种中间和最终数据</p>
+<h3 id="IPS："><a href="#IPS：" class="headerlink" title="IPS："></a>IPS：</h3><p>入侵防御系统</p>
+<p>接入方式：串行</p>
+<p>工作机制：监测+阻断</p>
+<p>不足：单点故障、性能瓶颈、误报</p>
+<h3 id="网络安全架构"><a href="#网络安全架构" class="headerlink" title="网络安全架构"></a>网络安全架构</h3><p>合理划分网络安全区域</p>
+<h4 id="规划网络IP地址"><a href="#规划网络IP地址" class="headerlink" title="规划网络IP地址"></a>规划网络IP地址</h4><p>规划要点</p>
+<p>自顶向下的方法</p>
+<p>为所设计的网络中的节点、网络设备分配合适的IP地址</p>
+<p>综合考虑网络层次规划、路由协议规划、流量规划</p>
+<p>IP地址分配</p>
+<p>静态IP地址分配</p>
+<p>动态IP地址分配（DHCP）</p>
+<p>NAT</p>
+<h4 id="vlan设计"><a href="#vlan设计" class="headerlink" title="vlan设计"></a>vlan设计</h4><h5 id="VLAN的作用"><a href="#VLAN的作用" class="headerlink" title="VLAN的作用"></a>VLAN的作用</h5><p>控制网络的广播风暴</p>
+<p>提高网络安全性</p>
+<p>简化网络管理</p>
+<h5 id="设计要点"><a href="#设计要点" class="headerlink" title="设计要点"></a>设计要点</h5><p>根据业务需要划分虚拟工作组，保护重要资源</p>
+<p>建立VLAN之间的访问机制</p>
+<p>VLAN划分的方法</p>
+<p>基于端口划分的VLAN</p>
+<p>基于MAC地址划分VLAN</p>
+<p>基于网络层划分VLAN</p>
+<p>根基IP组播划分VLAN</p>
+<p>将网内设备的逻辑地划分成一个个网段从而实现虚拟工作组</p>
+<p>通过VLAN隔离技术，可以吧一个网络系统中众多的网络设备分成若干个虚拟的工作组</p>
+<p>安全作用</p>
+<p>建立VLAN之间的访问机制，阻止蠕虫和恶意病毒的广泛传播</p>
+<p>建立VLAN区域安全和资源保护，将受限制的应用程序和资源置于更为安全的VLAN中</p>
+<h5 id="安全配置路由交换设备"><a href="#安全配置路由交换设备" class="headerlink" title="安全配置路由交换设备"></a>安全配置路由交换设备</h5><p>更新设备操作系统版本</p>
+<p>关闭空闲的物理接口</p>
+<p>访问控制（严格口令及关闭服务）</p>
+<p>日志保护</p>
+<p>配置备份</p>
+<p>网络边界访问控制策略</p>
+<p>内部网络与互联网之间</p>
+<p>内部网络与</p>
+<h5 id="网络冗余配置（HSRP）负载均衡"><a href="#网络冗余配置（HSRP）负载均衡" class="headerlink" title="网络冗余配置（HSRP）负载均衡"></a>网络冗余配置（HSRP）负载均衡</h5><p>防治单点故障</p>
+<p>可以提高网络的健全性、稳定性</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/01/22/路由重分布/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/IDS,IPS/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/NAT/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/OSPF/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/动态路由协议-RIP/"></a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
+  
+    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 Wenpeng Huang
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

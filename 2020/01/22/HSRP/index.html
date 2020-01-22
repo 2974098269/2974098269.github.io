@@ -3,9 +3,13 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Archives | 网络基础</title>
+  <title>网络基础</title>
   <meta name="author" content="Wenpeng Huang">
 
+  
+  <meta name="description" content="热备份路由协议（网关冗余）：HSRP(思科私有) VRRP(工业标准)
+用HSRP
+热备份路由 协议的原理：">
   
 
   
@@ -55,73 +59,86 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">Archives</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-22T07:23:15.918Z"><a href="/2020/01/22/HSRP/">2020-01-22</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <p>热备份路由协议（网关冗余）：HSRP(思科私有) VRRP(工业标准)</p>
+<p>用HSRP</p>
+<p>热备份路由 协议的原理：</p>
+<a id="more"></a>
 
-  <div class="archive">
+<p>1.做一个虚拟接口</p>
+<p>int vlan 10</p>
+<p>standby 10 ip 192.168.10.250 开启虚拟接口</p>
+<p>2.比较两个端口的优先级，优先级大 主要网关（active）小就是备份（standby）</p>
+<p>standby 10 priority 120 设置优先级（默认100）</p>
+<p>3.跟踪端口</p>
+<p>standby 10 track f0/23 设置跟踪端口（不能同时设置两个端口）</p>
+<p>4.抢占模式</p>
+<p>standby 10 preempt 设置抢占模式</p>
+<p>5.hello时间</p>
+<p>standby 10 timers 3 10 设置hello时间</p>
+<p>检查配置：</p>
+<p>show standby</p>
+<p>VRRP配置</p>
+<p>路由协议介绍及静态路由</p>
+<p>路由的概念</p>
+<p>通过路由表寻址（ 每个路由器都有一个路由表）</p>
+<p>路由 协议分为：动态（自动学习【RIP,Eigip】），静态（手动添加路径）</p>
+<p>​                            动态路由协议：</p>
+<p>​                            内部网关路由协议:自治系统内</p>
+<p>​                            外部网关路由协议</p>
+<p>静态路由的配置：</p>
+<p>设置端口号</p>
+<p>查看路由表</p>
+<p>show ip route</p>
+<p>静态路由的配置：         </p>
+<p>ip route  12.1.1.0 255.255.255.0 192.168.10.2</p>
+<p>​                 目标网路地址 子网掩码  下一跳地址 与到达目标网络方向所直连的地址</p>
+<p>ip route   12.1.1.0 255.255.255.0  f0/0(出接口) 或</p>
+<p>ip route  192.168.10.0 255.255.255.0 12.1.1.2  </p>
+<p>静态路由只用于很小的网络，并且是管理员对网络结构非常熟悉的情况下。</p>
+<p>默认路由：用于不知道对方网络结构的情况系，如上网（配置在出口路由上）。</p>
+<p>ip route 0.0.0.0 0.0.0.0  f0/0</p>
+<p>浮动静态路由</p>
+<p>会根据管理距离值的大小，选择一条最优（管理距离小的）路由添加到路由表中。</p>
+<p>静态选择路由（最长匹配原则）优先走子网掩码最长的路径</p>
+<p>ip route 12.1.1.2 255.255.255.255 f0/0</p>
+<p>回环测试 loopback</p>
+<p>int loopback 0</p>
+<p>ip add </p>
+
+      
+    </div>
     
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2020-01-22T07:52:20.210Z"><a href="/2020/01/22/路由重分布/">2020-01-22</a></time>
-            
-              <h1 class="title"><a href="/2020/01/22/路由重分布/"></a></h1>
-            
-          </header>
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
         </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2020-01-22T07:50:47.347Z"><a href="/2020/01/22/IDS,IPS/">2020-01-22</a></time>
-            
-              <h1 class="title"><a href="/2020/01/22/IDS,IPS/"></a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2020-01-22T07:49:23.370Z"><a href="/2020/01/22/NAT/">2020-01-22</a></time>
-            
-              <h1 class="title"><a href="/2020/01/22/NAT/"></a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2020-01-22T07:39:03.067Z"><a href="/2020/01/22/OSPF/">2020-01-22</a></time>
-            
-              <h1 class="title"><a href="/2020/01/22/OSPF/"></a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2020-01-22T07:36:06.266Z"><a href="/2020/01/22/动态路由协议-RIP/">2020-01-22</a></time>
-            
-              <h1 class="title"><a href="/2020/01/22/动态路由协议-RIP/"></a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
   </div>
+</article>
+
+
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
