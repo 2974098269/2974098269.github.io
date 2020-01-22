@@ -7,9 +7,7 @@
   <meta name="author" content="Wenpeng Huang">
 
   
-  <meta name="description" content="热备份路由协议（网关冗余）：HSRP(思科私有) VRRP(工业标准)
-用HSRP
-热备份路由 协议的原理：">
+  <meta name="description" content="● 热备份路由协议（网关冗余）● 路由协议介绍及静态路由">
   
 
   
@@ -75,51 +73,58 @@
     </header>
     <div class="entry">
       
-        <p>热备份路由协议（网关冗余）：HSRP(思科私有) VRRP(工业标准)</p>
-<p>用HSRP</p>
-<p>热备份路由 协议的原理：</p>
-<a id="more"></a>
+        <h2 id="●-热备份路由协议（网关冗余）"><a href="#●-热备份路由协议（网关冗余）" class="headerlink" title="● 热备份路由协议（网关冗余）"></a>● 热备份路由协议（网关冗余）</h2><h2 id="●-路由协议介绍及静态路由"><a href="#●-路由协议介绍及静态路由" class="headerlink" title="● 路由协议介绍及静态路由"></a>● 路由协议介绍及静态路由</h2><a id="more"></a>
 
+<h3 id="HSRP："><a href="#HSRP：" class="headerlink" title="HSRP："></a>HSRP：</h3><p>HSRP(思科私有) VRRP(工业标准)</p>
+<p>热备份路由协议的原理：</p>
+<p>实现HSRP的条件是系统中有多台路由器，它们组成一个“热备份组”，这个组形成一个虚拟路由器。在任一时刻，一个组内只有一个路由器是活动的，并由它来转发数据包，如果活动路由器发生了故障，将选择一个备份路由器来替代活动路由器，但是在本网络内的主机看来，虚拟路由器没有改变。所以主机仍然保持连接，没有受到故障的影响，这样就较好地解决了路由器切换的问题。</p>
+<p>HSRP协议利用一个优先级方案来决定哪个配置了HSRP协议的路由器成为默认的主动路由器。如果一个路由器的优先级设置的比所有其他路由器的优先级高，则该路由器成为主动路由器。路由器的缺省优先级是100，所以如果只设置一个路由器的优先级高于100，则该路由器将成为主动路由器。 通过在设置了HSRP协议的路由器之间广播HSRP优先级，HSRP协议选出当前的主动路由器。当在预先设定的一段时间内主动路由器不能发送hello消息时，优先级最高的备用路由器变为主动路由器。路由器之间的包传输对网络上的所有主机来说都是透明的。</p>
+<p>热备份路由协议的步骤：</p>
 <p>1.做一个虚拟接口</p>
-<p>int vlan 10</p>
-<p>standby 10 ip 192.168.10.250 开启虚拟接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int vlan 10</span><br><span class="line">standby 10 ip 192.168.10.250 开启虚拟接口</span><br></pre></td></tr></table></figure>
+
 <p>2.比较两个端口的优先级，优先级大 主要网关（active）小就是备份（standby）</p>
-<p>standby 10 priority 120 设置优先级（默认100）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">standby 10 priority 120 设置优先级（默认100）</span><br></pre></td></tr></table></figure>
+
 <p>3.跟踪端口</p>
-<p>standby 10 track f0/23 设置跟踪端口（不能同时设置两个端口）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">standby 10 track f0/23 设置跟踪端口（不能同时设置两个端口）</span><br></pre></td></tr></table></figure>
+
 <p>4.抢占模式</p>
-<p>standby 10 preempt 设置抢占模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">standby 10 preempt 设置抢占模式</span><br></pre></td></tr></table></figure>
+
 <p>5.hello时间</p>
-<p>standby 10 timers 3 10 设置hello时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">standby 10 timers 3 10 设置hello时间</span><br></pre></td></tr></table></figure>
+
 <p>检查配置：</p>
-<p>show standby</p>
-<p>VRRP配置</p>
-<p>路由协议介绍及静态路由</p>
-<p>路由的概念</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show standby</span><br></pre></td></tr></table></figure>
+
+<h3 id="路由协议介绍及静态路由"><a href="#路由协议介绍及静态路由" class="headerlink" title="路由协议介绍及静态路由"></a>路由协议介绍及静态路由</h3><p>路由的概念</p>
 <p>通过路由表寻址（ 每个路由器都有一个路由表）</p>
 <p>路由 协议分为：动态（自动学习【RIP,Eigip】），静态（手动添加路径）</p>
 <p>​                            动态路由协议：</p>
 <p>​                            内部网关路由协议:自治系统内</p>
 <p>​                            外部网关路由协议</p>
-<p>静态路由的配置：</p>
-<p>设置端口号</p>
 <p>查看路由表</p>
-<p>show ip route</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show ip route</span><br></pre></td></tr></table></figure>
+
 <p>静态路由的配置：         </p>
-<p>ip route  12.1.1.0 255.255.255.0 192.168.10.2</p>
-<p>​                 目标网路地址 子网掩码  下一跳地址 与到达目标网络方向所直连的地址</p>
-<p>ip route   12.1.1.0 255.255.255.0  f0/0(出接口) 或</p>
-<p>ip route  192.168.10.0 255.255.255.0 12.1.1.2  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route  12.1.1.0 255.255.255.0 192.168.10.2</span><br></pre></td></tr></table></figure>
+
+<p>目标网路地址 子网掩码  下一跳地址 与到达目标网络方向所直连的地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip route   12.1.1.0 255.255.255.0  f0/0(出接口) 或</span><br><span class="line">ip route  192.168.10.0 255.255.255.0 12.1.1.2</span><br></pre></td></tr></table></figure>
+
 <p>静态路由只用于很小的网络，并且是管理员对网络结构非常熟悉的情况下。</p>
 <p>默认路由：用于不知道对方网络结构的情况系，如上网（配置在出口路由上）。</p>
-<p>ip route 0.0.0.0 0.0.0.0  f0/0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route 0.0.0.0 0.0.0.0  f0/0</span><br></pre></td></tr></table></figure>
+
 <p>浮动静态路由</p>
 <p>会根据管理距离值的大小，选择一条最优（管理距离小的）路由添加到路由表中。</p>
 <p>静态选择路由（最长匹配原则）优先走子网掩码最长的路径</p>
-<p>ip route 12.1.1.2 255.255.255.255 f0/0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route 12.1.1.2 255.255.255.255 f0/0</span><br></pre></td></tr></table></figure>
+
 <p>回环测试 loopback</p>
-<p>int loopback 0</p>
-<p>ip add </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int loopback 0</span><br><span class="line"></span><br><span class="line">ip add ip地址</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -180,26 +185,8 @@
 
 
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
-  
-    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
-  
-  </ul>
-</div>
-
 
   
-<div class="widget tagcloud">
-  <h3 class="title">Tag Cloud</h3>
-  <div class="entry">
-    
-  </div>
-</div>
-
 </aside>
     <div class="clearfix"></div>
   </div>

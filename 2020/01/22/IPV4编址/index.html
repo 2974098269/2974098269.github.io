@@ -7,13 +7,7 @@
   <meta name="author" content="Wenpeng Huang">
 
   
-  <meta name="description" content="IP地址介绍及VLSMIP地址由32位二进制数组成，这些位被划分为4个字节，中间用“.”隔开，
-分为网络地址和主机地址两个部分。
-IPV4一共有：2^32 大约是40亿多个地址
-IP地址在网路是唯一的，不能重复。
-对地址进行分类
-公有地址、私有地址、保留地址
-NET网络地址转换">
+  <meta name="description" content="● IP地址分类● VLAN通信● DHCP的配置">
   
 
   
@@ -79,26 +73,26 @@ NET网络地址转换">
     </header>
     <div class="entry">
       
-        <h1 id="IP地址介绍及VLSM"><a href="#IP地址介绍及VLSM" class="headerlink" title="IP地址介绍及VLSM"></a>IP地址介绍及VLSM</h1><p>IP地址由32位二进制数组成，这些位被划分为4个字节，中间用“.”隔开，</p>
+        <h2 id="●-IP地址分类"><a href="#●-IP地址分类" class="headerlink" title="● IP地址分类"></a>● IP地址分类</h2><h2 id="●-VLAN通信"><a href="#●-VLAN通信" class="headerlink" title="● VLAN通信"></a>● VLAN通信</h2><h2 id="●-DHCP的配置"><a href="#●-DHCP的配置" class="headerlink" title="● DHCP的配置"></a>● DHCP的配置</h2><a id="more"></a>
+
+<h3 id="IP地址："><a href="#IP地址：" class="headerlink" title="IP地址："></a>IP地址：</h3><p>IP地址由32位二进制数组成，这些位被划分为4个字节，中间用“.”隔开，</p>
 <p>分为网络地址和主机地址两个部分。</p>
 <p>IPV4一共有：2^32 大约是40亿多个地址</p>
 <p>IP地址在网路是唯一的，不能重复。</p>
 <p>对地址进行分类</p>
 <p>公有地址、私有地址、保留地址</p>
 <p>NET网络地址转换</p>
-<a id="more"></a>
-
-<h2 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h2><h3 id="A类地址分类"><a href="#A类地址分类" class="headerlink" title="A类地址分类"></a>A类地址分类</h3><p>第一个字节的第一位必须为0，第一个字节的取值为0-127</p>
+<h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><h4 id="A类地址分类"><a href="#A类地址分类" class="headerlink" title="A类地址分类"></a>A类地址分类</h4><p>第一个字节的第一位必须为0，第一个字节的取值为0-127</p>
 <p>主机号全0是网络号（1.0.0.0） 全1是广播地址（1.1.1.1）   255.0.0.0 前八位是网络号 后24位是主机地址 </p>
 <p>在网络中有 2^24 个地址可用</p>
 <p>有效地址为（可以配置给主机的地址）：2^24-2</p>
 <p>子网掩码为：255.0.0.0   斜杠表示法：1.1.1.1/8</p>
-<h3 id="B类地址分类"><a href="#B类地址分类" class="headerlink" title="B类地址分类"></a>B类地址分类</h3><p>第一个字节的第一位必须是1，且第二位必须是0，第一个字节的取值为128-191</p>
+<h4 id="B类地址分类"><a href="#B类地址分类" class="headerlink" title="B类地址分类"></a>B类地址分类</h4><p>第一个字节的第一位必须是1，且第二位必须是0，第一个字节的取值为128-191</p>
 <p>主机号全0是网络号（1.1.0.0） 全1是广播地址（1.1.1.1）   255.0.0.0 前八位是网络号 后24位是主机地址 </p>
 <p>在网络中有 2^24 个地址可用</p>
 <p>有效地址为（可以配置给主机的地址）：2^24-2</p>
 <p>子网掩码为：255.0.0.0   斜杠表示法：1.1.1.1/8</p>
-<h3 id="c类地址分类"><a href="#c类地址分类" class="headerlink" title="c类地址分类"></a>c类地址分类</h3><p>第一个字节的前前两位必须是1，且第三位必须是0，第一个字节的取值为192-223</p>
+<h4 id="c类地址分类"><a href="#c类地址分类" class="headerlink" title="c类地址分类"></a>c类地址分类</h4><p>第一个字节的前前两位必须是1，且第三位必须是0，第一个字节的取值为192-223</p>
 <p>D类网络地址范围：第一个字节为224-239，用作组播地址。</p>
 <p>E类网络的地址范围：第一个字节为240-255，用于科学用途。</p>
 <p>保留地址的IP</p>
@@ -110,8 +104,7 @@ NET网络地址转换">
 <p>A类 10.0.0.0~10.255.255.255</p>
 <p>B类 172.16.0.0~172.31.255.255</p>
 <p>C类 192.168.0.0~192.168.255.255</p>
-<p>子网划分</p>
-<p>将大的网络划分成若干个小网络，尽量减少广播风暴，提高网络效率</p>
+<h4 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h4><p>将大的网络划分成若干个小网络，尽量减少广播风暴，提高网络效率</p>
 <p>比如：</p>
 <p>c类IP地址：192.168.1.0 网络号：192.168.1.0 广播号：192.168.1.255 可用地址：1.1-1.254</p>
 <p>向主机借位</p>
@@ -163,8 +156,6 @@ NET网络地址转换">
 <p>12.128.0.0</p>
 <p>12.192.0.0</p>
 <p>有类网络：不携带子网掩码</p>
-<p>地址汇总</p>
-<p>下午</p>
 <h1 id="交换机工作原理及VLAN"><a href="#交换机工作原理及VLAN" class="headerlink" title="交换机工作原理及VLAN"></a>交换机工作原理及VLAN</h1><p>以太网地址用来识别一个以太网上的某个单独的设备或一组设备</p>
 <p>MAC地址是有48位二进制数组成，以十六进制数表示。钱24位称为OUI，后24位是厂商对网卡的唯一标识，第八位如果是0表示单播地址。</p>
 <p>以太网帧格式</p>
@@ -179,148 +170,109 @@ NET网络地址转换">
 <p>1.vlan技术（虚拟局域网）</p>
 <p>划分vlan方法：基于端口的划分，基于MAC地址的划分</p>
 <p>基于端口的vlan划分：</p>
-<p>Switch#show vlan brief  查看vlan的详细信息</p>
-<p>Switch#config t</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Switch#show vlan brief  查看vlan的详细信息</span><br><span class="line">Switch#config t</span><br></pre></td></tr></table></figure>
+
 <p><strong>划分vlan:</strong></p>
-<p>Sw1(config)#vlan 10</p>
-<p>Sw1(config-vlan)#name rsb</p>
-<p>Sw1(config-vlan)#vlan 20</p>
-<p>Sw1(config-vlan)#name xsb</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sw1(config)#vlan 10</span><br><span class="line">Sw1(config-vlan)#name rsb</span><br><span class="line">Sw1(config-vlan)#vlan 20</span><br><span class="line">Sw1(config-vlan)#name xsb</span><br></pre></td></tr></table></figure>
+
 <p><strong>将端口加入到对应的vlan:</strong></p>
-<p>Sw1(config-vlan)#exit</p>
-<p>Sw1(config)#interface range f0/1-10      同时选中多个端口</p>
-<p>Sw1(config-if-range)#switchport mode access  设置端口为ACCESS模式</p>
-<p>Sw1(config-if-range)#switchport access vlan 10 将端口加入到vlan10</p>
-<p>Sw1(config-if-range)#exit</p>
-<p>Sw1(config)#int range f0/11-20   同时选中多个端口</p>
-<p>Sw1(config-if-range)#sw mo acc   设置端口为ACCESS模式</p>
-<p>Sw1(config-if-range)#sw acc vlan 20 将端口加入到vlan20</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sw1(config-vlan)#exit</span><br><span class="line">Sw1(config)#interface range f0/1-10      同时选中多个端口</span><br><span class="line">Sw1(config-if-range)#switchport mode access  设置端口为ACCESS模式</span><br><span class="line">Sw1(config-if-range)#switchport access vlan 10 将端口加入到vlan10</span><br><span class="line">Sw1(config-if-range)#exit</span><br><span class="line">Sw1(config)#int range f0/11-20   同时选中多个端口</span><br><span class="line">Sw1(config-if-range)#sw mo acc   设置端口为ACCESS模式</span><br><span class="line">Sw1(config-if-range)#sw acc vlan 20 将端口加入到vlan20</span><br></pre></td></tr></table></figure>
+
 <p>查看vlan划分结果是否正确：</p>
-<p>Sw1(config-if-range)#end</p>
-<p>Sw1#show vlan brief </p>
-<p>Sw2(config)#vlan 10</p>
-<p>Sw2(config-vlan)#name rsb</p>
-<p>Sw2(config-vlan)#vlan 20</p>
-<p>Sw2(config-vlan)#name xsb</p>
-<p>Sw2(config)#int range f0/1-10</p>
-<p>Sw2(config-if-range)#sw mo acc</p>
-<p>Sw2(config-if-range)#sw acc vlan 10</p>
-<p>Sw2(config-if-range)#exit</p>
-<p>Sw2(config)#int range f0/11-20</p>
-<p>Sw2(config-if-range)#sw mo acc</p>
-<p>Sw2(config-if-range)#sw acc vlan 20</p>
-<p><strong>如何实现不同交换机上的同一个**</strong>vlan<strong>**间的通信？</strong></p>
-<p>需要使用trunk【vlan中继协议】技术</p>
-<p> <strong>（1**</strong>）封装** </p>
-<p>   ISL（思科私有）：是在数据帧前加26字节，尾加4字节</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Sw1(config-if-range)#end</span><br><span class="line">Sw1#show vlan brief</span><br></pre></td></tr></table></figure>
+
+<h5 id="实现不同交换机上的同一个vlan间的通信"><a href="#实现不同交换机上的同一个vlan间的通信" class="headerlink" title="实现不同交换机上的同一个vlan间的通信"></a>实现不同交换机上的同一个<strong>vlan</strong>间的通信</h5><p>需要使用trunk【vlan中继协议】技术</p>
+<h6 id="（1）封装"><a href="#（1）封装" class="headerlink" title="（1）封装"></a>（1）封装</h6><p>   ISL（思科私有）：是在数据帧前加26字节，尾加4字节</p>
 <p>   802.1Q（工业标准）：是在数据帧中插入4字节，打标签</p>
 <p>   802.1Q Native Vlan：默认vlan1不打标，作管理用</p>
-<p> <strong>（2**</strong>）模式**</p>
-<p>   Mode     DTP send   DTP Response</p>
-<p>  -———————————————–</p>
-<p>   Access      -      -</p>
-<p>   Trunk      Y      Y      </p>
-<p>   Desirable     Y      Y    企望  </p>
-<p>   Auto       N      Y   自动</p>
-<p>   Nonegotiate    N      N   不协商</p>
-<p>Sw1(config)#int f0/24</p>
-<p>Sw1(config-if)#switchport mode trunk </p>
-<p>Sw1#sh interfaces f0/24 switchport  查看端口状态</p>
-<p>Sw1#sh interfaces trunk  查看trunk端口</p>
-<p><strong>如何实现不同**</strong>vlan<strong>**间通信呢？</strong></p>
-<p><strong>方法一：使用三层交换机，配置**</strong>SVI<strong><strong>虚拟接口作为不同</strong></strong>vlan<strong>**网关，并开启路由功能来实现</strong></p>
-<p><strong>方法二：使用单臂路由来实现</strong></p>
-<p><strong>方法一：使用三层交换机来实现不同**</strong>Vlan<strong>**间通信</strong></p>
-<p><img src="file:///C:%5CUsers%5Cdl%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image002.jpg" alt="img"></p>
-<p>Switch(config)#hostname Sw3</p>
+<h6 id="（2）模式"><a href="#（2）模式" class="headerlink" title="（2）模式"></a>（2）模式</h6><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>DTP send</th>
+<th>DTP Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Access</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Trunk</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Desirable（企望）</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Auto（自动）</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Nonegotiate（不协商）</td>
+<td>N</td>
+<td>N</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sw1(config)#int f0/24</span><br><span class="line">Sw1(config-if)#switchport mode trunk </span><br><span class="line">Sw1#sh interfaces f0/24 switchport  查看端口状态</span><br><span class="line">Sw1#sh interfaces trunk  查看trunk端口</span><br></pre></td></tr></table></figure>
+
+<p>实现不同<strong>vlan</strong>间通信</p>
+<p><strong>方法一：</strong></p>
+<p>使用三层交换机，配置SVI虚拟接口作为不同vlan网关，并开启路由功能来实现</p>
 <p>第一步：划vlan</p>
-<p>Sw3(config)#vlan 10</p>
-<p>Sw3(config-vlan)#name rsb</p>
-<p>Sw3(config-vlan)#vlan 20</p>
-<p>Sw3(config-vlan)#name xsb</p>
-<p>Sw3(config-vlan)#exit</p>
-<p>Sw3(config)#int f0/23</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Sw3(config)#vlan 10</span><br><span class="line">Sw3(config-vlan)#name rsb</span><br><span class="line">Sw3(config-vlan)#vlan 20</span><br><span class="line">Sw3(config-vlan)#name xsb</span><br><span class="line">Sw3(config-vlan)#exit</span><br><span class="line">Sw3(config)#int f0/23</span><br></pre></td></tr></table></figure>
+
 <p>第二步：</p>
-<p>Sw3(config-if)#switchport trunk encapsulation dot1q </p>
-<p>Sw3(config-if)#sw mo trunk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Sw3(config-if)#switchport trunk encapsulation dot1q </span><br><span class="line">Sw3(config-if)#sw mo trunk</span><br></pre></td></tr></table></figure>
+
 <p>第三步：</p>
-<p>Sw3(config-if)#exit</p>
-<p>Sw3(config)#ip routing</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Sw3(config-if)#exit</span><br><span class="line">Sw3(config)#ip routing</span><br></pre></td></tr></table></figure>
+
 <p>第四步：</p>
-<p>Sw3(config)#int vlan 10</p>
-<p>Sw3(config-if)#ip add 192.168.10.254 255.255.255.0</p>
-<p>Sw3(config-if)#exit</p>
-<p>Sw3(config)#int vlan 20</p>
-<p>ip add 192.168.20.254 255.255.255.0</p>
-<p>第五步：为PC机配置网关地址</p>
-<p>最后要检查配置是否正确？</p>
-<p>Sw3#sh vlan brief</p>
-<p>Sw3#sh interfaces trunk </p>
-<p>Sw2#sh running-config</p>
-<p><strong>方法二：使用路由器（单臂路由）来实现</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Sw3(config)#int vlan 10</span><br><span class="line">Sw3(config-if)#ip add 192.168.10.254 255.255.255.0</span><br><span class="line">Sw3(config-if)#exit</span><br><span class="line">Sw3(config)#int vlan 20</span><br><span class="line">ip add 192.168.20.254 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<p>第五步：为PC机配置网关地址<br>最后要检查配置是否正确</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sw3#sh vlan brief</span><br><span class="line">Sw3#sh interfaces trunk </span><br><span class="line">Sw2#sh running-config</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二：使用单臂路由来实现</strong></p>
 <p>SW1的配置：</p>
 <p><strong>划分vlan</strong></p>
-<p>SW1(config)#vlan 10</p>
-<p>SW1(config-vlan)#vlan 20</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SW1(config)#vlan 10</span><br><span class="line">SW1(config-vlan)#vlan 20</span><br></pre></td></tr></table></figure>
+
 <p><strong>将端口加入到vlan</strong></p>
-<p>SW1(config)#int range f0/1-10</p>
-<p>SW1(config-if-range)#sw mo acc</p>
-<p>SW1(config-if-range)#sw acc vlan 10</p>
-<p>SW1(config-if-range)#exit</p>
-<p>SW1(config)#int range f0/11-20</p>
-<p>SW1(config-if-range)#sw mo acc</p>
-<p>SW1(config-if-range)#sw acc vlan 20</p>
-<p><strong>检查vlan**</strong>划分与端口加入情况**</p>
-<p>SW1#sh vlan</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SW1(config)#int range f0/1-10</span><br><span class="line">SW1(config-if-range)#sw mo acc</span><br><span class="line">SW1(config-if-range)#sw acc vlan 10</span><br><span class="line">SW1(config-if-range)#exit</span><br><span class="line">SW1(config)#int range f0/11-20</span><br><span class="line">SW1(config-if-range)#sw mo acc</span><br><span class="line">SW1(config-if-range)#sw acc vlan 20</span><br></pre></td></tr></table></figure>
+
+<p>检查vlan划分与端口加入情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SW1#sh vlan</span><br></pre></td></tr></table></figure>
+
 <p><strong>设置trunk</strong></p>
-<p>SW1(config)#int f0/24</p>
-<p>SW1(config-if)#sw mo trunk </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SW1(config)#int f0/24</span><br><span class="line">SW1(config-if)#sw mo trunk</span><br></pre></td></tr></table></figure>
+
 <p>R1的配置：</p>
-<p>Router(config)#hostname R1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Router(config)#hostname R1</span><br></pre></td></tr></table></figure>
+
 <p><strong>开启端口</strong></p>
-<p>R1(config)#int f0/0</p>
-<p>R1(config-if)#no shutdown</p>
-<p><strong>开启子接口，封装为trunk**</strong>，并设置IP<strong><strong>地址作为对应vlan</strong></strong>的网关**</p>
-<p>R1(config-if)#exit</p>
-<p>R1(config)#int f0/0.10</p>
-<p>R1(config-subif)#encapsulation dot1Q 10 封装并作为vlan 10的网关</p>
-<p>R1(config-subif)#ip add 192.168.10.254 255.255.255.0</p>
-<p>R1(config)#int f0/0.2</p>
-<p>R1(config-subif)#encapsulation dot1Q 20</p>
-<p>R1(config-subif)#ip add 192.168.20.254 255.255.255.0</p>
-<p><strong>为PC**</strong>机设置网关地址**</p>
-<p><strong>DHCP**</strong>的配置**</p>
-<p>\1.  什么是DHCP？动态主机配置协议，作用就是为客户端自动分配IP地址。</p>
-<p>\2.  DHCP的工作原理？</p>
-<p>\3.  谁可以做DHCP服务器呢？服务器、三层设备</p>
-<p><strong>如何配置路由器为**</strong>DHCP<strong>**服务器？</strong></p>
-<p>R1#config t</p>
-<p>R1(config)#ip dhcp pool vlan10   地址池名</p>
-<p>R1(dhcp-config)#network 192.168.10.0 255.255.255.0  地址范围</p>
-<p>R1(dhcp-config)#default-router 192.168.10.254   网关地址</p>
-<p>R1(dhcp-config)#dns-server 61.139.2.69      DNS地址</p>
-<p>R1(dhcp-config)#exit</p>
-<p>R1(config)#ip dhcp excluded-address 192.168.10.1 192.168.10.10  排除地址</p>
-<p>R1(config)#ip dhcp excluded-address 192.168.20.1 192.168.20.10</p>
-<p>R1(config)#ip dhcp pool vlan20</p>
-<p>R1(dhcp-config)#network 192.168.20.0 255.255.255.0</p>
-<p>R1(dhcp-config)#default-router 192.168.20.254</p>
-<p>R1(dhcp-config)#dns-server 61.139.2.69</p>
-<p><strong>如果使用服务器作**</strong>DHCP<strong>**服务器呢？</strong></p>
-<p><img src="file:///C:%5CUsers%5Cdl%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image002.jpg" alt="img"></p>
-<p><strong>首先</strong>：配置vlan间通信</p>
-<p>Sw3(config)#vlan 100</p>
-<p>Sw3(config-vlan)#exit</p>
-<p>Sw3(config)#int f0/1</p>
-<p>Sw3(config-if)#sw mo acc</p>
-<p>Sw3(config-if)#sw acc vlan 100</p>
-<p>Sw3(config-if)#ip add 192.168.100.254 255.255.255.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1(config)#int f0/0</span><br><span class="line">R1(config-if)#no shutdown</span><br></pre></td></tr></table></figure>
+
+<p><strong>开启子接口，封装为trunk</strong>，并设置IP地址作为对应vlan的网关</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R1(config-if)#exit</span><br><span class="line">R1(config)#int f0/0.10</span><br><span class="line">R1(config-subif)#encapsulation dot1Q 10 封装并作为vlan 10的网关</span><br><span class="line">R1(config-subif)#ip add 192.168.10.254 255.255.255.0</span><br><span class="line">R1(config)#int f0/0.2</span><br><span class="line">R1(config-subif)#encapsulation dot1Q 20</span><br><span class="line">R1(config-subif)#ip add 192.168.20.254 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>为PC</strong> <strong>机设置网关地址</strong></p>
+<h5 id="DHCP-的配置"><a href="#DHCP-的配置" class="headerlink" title="DHCP 的配置"></a><strong>DHCP</strong> <strong>的配置</strong></h5><p><strong>配置路由器为</strong> <strong>DHCP</strong>服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R1#config t</span><br><span class="line">R1(config)#ip dhcp pool vlan10   地址池名</span><br><span class="line">R1(dhcp-config)#network 192.168.10.0 255.255.255.0  地址范围</span><br><span class="line">R1(dhcp-config)#default-router 192.168.10.254   网关地址</span><br><span class="line">R1(dhcp-config)#dns-server 61.139.2.69      DNS地址</span><br><span class="line">R1(dhcp-config)#exit</span><br><span class="line">R1(config)#ip dhcp excluded-address 192.168.10.1 192.168.10.10  排除地址</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用服务器作DHCP服务器"><a href="#使用服务器作DHCP服务器" class="headerlink" title="使用服务器作DHCP服务器"></a>使用服务器作DHCP服务器</h3><p><strong>首先</strong>：配置vlan间通信</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Sw3(config)#vlan 100</span><br><span class="line">Sw3(config-vlan)#exit</span><br><span class="line">Sw3(config)#int f0/1</span><br><span class="line">Sw3(config-if)#sw mo acc</span><br><span class="line">Sw3(config-if)#sw acc vlan 100</span><br><span class="line">Sw3(config-if)#ip add 192.168.100.254 255.255.255.0</span><br></pre></td></tr></table></figure>
+
 <p><strong>其次：</strong>配置DHCP服务器</p>
 <p><strong>最后，</strong>配置转发</p>
-<p>Sw3(config)#int vlan 10</p>
-<p>Sw3(config-if)#ip helper-address 192.168.100.1</p>
-<p>Sw3(config)#int vlan 20</p>
-<p>Sw3(config-if)#ip helper-address 192.168.100.1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sw3(config)#int vlan 10</span><br><span class="line">Sw3(config-if)#ip helper-address 192.168.100.1</span><br><span class="line">Sw3(config)#int vlan 20</span><br><span class="line">Sw3(config-if)#ip helper-address 192.168.100.1</span><br></pre></td></tr></table></figure>
+
 <p>IP变直方案、子网发划分、斜杠表示法、vlsm可边长子网掩码、无类子网设计、ip地址汇总</p>
 <p>交换机的工作原理，vlan的配置及如何实现vlan间的通信。dhcp的原理及配置。</p>
 <p>mac地址构成</p>
@@ -388,26 +340,8 @@ NET网络地址转换">
 
 
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
-  
-    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
-  
-  </ul>
-</div>
-
 
   
-<div class="widget tagcloud">
-  <h3 class="title">Tag Cloud</h3>
-  <div class="entry">
-    
-  </div>
-</div>
-
 </aside>
     <div class="clearfix"></div>
   </div>

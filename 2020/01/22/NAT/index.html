@@ -7,7 +7,7 @@
   <meta name="author" content="Wenpeng Huang">
 
   
-  <meta name="description" content="NAT">
+  <meta name="description" content="● 静态NAT● 动态NAT● 复用NAT">
   
 
   
@@ -73,9 +73,9 @@
     </header>
     <div class="entry">
       
-        <h1 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h1><a id="more"></a>
+        <h2 id="●-静态NAT"><a href="#●-静态NAT" class="headerlink" title="● 静态NAT"></a>● 静态NAT</h2><h2 id="●-动态NAT"><a href="#●-动态NAT" class="headerlink" title="● 动态NAT"></a>● 动态NAT</h2><h2 id="●-复用NAT"><a href="#●-复用NAT" class="headerlink" title="● 复用NAT"></a>● 复用NAT</h2><a id="more"></a>
 
-<p>网路地址转换，将私有地址转换为公有地址进行上网节约IP地址。</p>
+<h3 id="NAT："><a href="#NAT：" class="headerlink" title="NAT："></a>NAT：</h3><p>网路地址转换，将私有地址转换为公有地址进行上网节约IP地址。</p>
 <p>可以隐藏内部网络，对内网可以起到一定的保护作用。</p>
 <p>A类地址：0-127</p>
 <p>私有地址：：10.0.0.0~10.255.255.255</p>
@@ -93,15 +93,15 @@
 
 <p>（将内部地址192.168.20.100转换为13.1.1.1地址进行访问）</p>
 <p>指定inside与outside地址</p>
-<h6 id="3-指定inside与outside接口"><a href="#3-指定inside与outside接口" class="headerlink" title="3.指定inside与outside接口"></a>3.指定inside与outside接口</h6><p>int f0/1</p>
-<p>ip nat inside (指定内部接口)</p>
-<p>intf0/0</p>
-<p>ip nat outside (指定外部接口)</p>
+<h6 id="3-指定inside与outside接口"><a href="#3-指定inside与outside接口" class="headerlink" title="3.指定inside与outside接口"></a>3.指定inside与outside接口</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int f0/1</span><br><span class="line">ip nat inside (指定内部接口)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">intf0/0</span><br><span class="line">ip nat outside (指定外部接口)</span><br></pre></td></tr></table></figure>
+
 <h6 id="4-测试："><a href="#4-测试：" class="headerlink" title="4.测试："></a>4.测试：</h6><p>debug ip nat (开启nat 的动态转换过程)</p>
 <p>​                关闭一个：undebug ip nat</p>
 <p>​                关闭所有：undebug all</p>
-<h6 id="5-如果测试不成功，如何排错？"><a href="#5-如果测试不成功，如何排错？" class="headerlink" title="5.如果测试不成功，如何排错？"></a>5.如果测试不成功，如何排错？</h6><p>show run</p>
-<p>show ip nat ？</p>
+<h6 id="5-如果测试不成功，如何排错？"><a href="#5-如果测试不成功，如何排错？" class="headerlink" title="5.如果测试不成功，如何排错？"></a>5.如果测试不成功，如何排错？</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show run</span><br><span class="line">show ip nat ？</span><br></pre></td></tr></table></figure>
+
 <p>先看nat转换地址，再看接口</p>
 <p>6.如果是这样配置，意思是将源地址192.168.20.100这台服务器上</p>
 <p>的所有服务都发布到了外网。</p>
@@ -189,26 +189,8 @@
 
 
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
-  
-    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
-  
-  </ul>
-</div>
-
 
   
-<div class="widget tagcloud">
-  <h3 class="title">Tag Cloud</h3>
-  <div class="entry">
-    
-  </div>
-</div>
-
 </aside>
     <div class="clearfix"></div>
   </div>

@@ -7,7 +7,7 @@
   <meta name="author" content="Wenpeng Huang">
 
   
-  <meta name="description" content="动态路由协议-RIP">
+  <meta name="description" content="● 动态路由协议-RIP">
   
 
   
@@ -73,66 +73,42 @@
     </header>
     <div class="entry">
       
-        <p><strong>动态路由协议</strong>-RIP</p>
-<a id="more"></a>
+        <h2 id="●-动态路由协议-RIP"><a href="#●-动态路由协议-RIP" class="headerlink" title="● 动态路由协议-RIP"></a>● 动态路由协议-RIP</h2><a id="more"></a>
 
-
-
-<p>一、静态路由与动态路由</p>
-<p>静态路由：管理员手动输入路由器命令管理</p>
+<h4 id="一、静态路由与动态路由"><a href="#一、静态路由与动态路由" class="headerlink" title="一、静态路由与动态路由"></a>一、静态路由与动态路由</h4><p>静态路由：管理员手动输入路由器命令管理</p>
 <p>动态路由：根据拓扑或流量改变而自动调整</p>
-<p>二、自治系统：内部路由协议和外部路由协议</p>
-<p>自治系统是通用管理域中的网络的集合。</p>
+<h4 id="二、自治系统：内部路由协议和外部路由协议"><a href="#二、自治系统：内部路由协议和外部路由协议" class="headerlink" title="二、自治系统：内部路由协议和外部路由协议"></a>二、自治系统：内部路由协议和外部路由协议</h4><p>自治系统是通用管理域中的网络的集合。</p>
 <p>内部网关协议在自治系统中工作。</p>
 <p>外部网关协议连接不同的自治系统。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image002.jpg" alt="img"></p>
-<p>三、路由协议的类型</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image004.jpg" alt="img"></p>
-<p><strong>四、距离矢量路由协议</strong></p>
-<p>路由器定期将路由表的副本传递给邻居路由器并累计<strong>距离矢量</strong>。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image006.jpg" alt="img"></p>
-<p>五、RIP工作原理（路由表的形成）</p>
-<p>  1、首先路由器学习到直连网段</p>
+<h4 id="四、距离矢量路由协议"><a href="#四、距离矢量路由协议" class="headerlink" title="四、距离矢量路由协议"></a>四、距离矢量路由协议</h4><p>路由器定期将路由表的副本传递给邻居路由器并累计距离矢量。 </p>
+<h4 id="五、RIP工作原理（路由表的形成）"><a href="#五、RIP工作原理（路由表的形成）" class="headerlink" title="五、RIP工作原理（路由表的形成）"></a>五、RIP工作原理（路由表的形成）</h4><p>  1、首先路由器学习到直连网段</p>
 <p>  路由器开始运行RIP，当路由器的更新周期30秒到了的时候，会向邻居发送路由表</p>
 <p>  Metric：度量值，衡量一条路由好坏的值。发送路由表时Metric值会加1</p>
-<p>  学习路由时，会学习最佳路由，将Metric值小的路由放到路由表当中</p>
-<p>  <img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image008.jpg" alt="img"></p>
-<p>六、RIP解决路由环路的办法</p>
-<p>不一致的路由条目：计数至无穷大和路由环路</p>
-<p>  1、计数到无穷大</p>
+<p>  学习路由时，会学习最佳路由，将Metric值小的路由放到路由表当中 </p>
+<h4 id="六、RIP解决路由环路的办法"><a href="#六、RIP解决路由环路的办法" class="headerlink" title="六、RIP解决路由环路的办法"></a>六、RIP解决路由环路的办法</h4><p>不一致的路由条目：计数至无穷大和路由环路</p>
+<p><strong>1、</strong>计数到无穷大</p>
 <p>每个节点都会维护从自身到每个可能的目的网络的距离</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image010.jpg" alt="img"></p>
-<p>计数至无穷大的解决方案：<strong>定义最大跳数（**</strong>15<strong>**跳）</strong></p>
+<p>计数至无穷大的解决方案：<strong>定义最大跳数</strong>（15跳）</p>
 <p>设置跳数限制以防止无限环路</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image012.jpg" alt="img"></p>
-<p>2、路由环路</p>
-<p>  前往网络 10.4.0.0 的数据包在路由器B和 C 之间来回传递（环路）。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image014.jpg" alt="img"></p>
+<p><strong>2、</strong>路由环路</p>
 <p>  路由环路的解决方案：<strong>水平分割</strong></p>
-<p>​            向原始信息的来源方向返回路由信息毫无用处。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image016.jpg" alt="img"></p>
-<p>3、路由环路的解决方案：<strong>路由毒化和毒性逆转</strong></p>
+<p> 向原始信息的来源方向返回路由信息毫无用处。</p>
+<p><strong>3、</strong>路由环路的解决方案：<strong>路由毒化和毒性逆转</strong></p>
 <p>  C：当4.0断开后，路由器将已经断开的路由的距离通告为无穷大。并立刻开启触发更新，向B发送更新包。</p>
 <p>  B：收到更新包后，将4.0路由标记为“可能已断开”，忽略水平分割，进行毒性逆转，向C发送路由信息，告诉C可能已断开。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image018.jpg" alt="img"></p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image020.jpg" alt="img"></p>
-<p>4、路由环路的解决方案：<strong>抑制计时器</strong></p>
+<p><strong>4、</strong>路由环路的解决方案：<strong>抑制计时器</strong></p>
 <p>  路由器为网络中的“可能有故障”状态保留条目，以便为其它路由器重新计算拓扑更改留出时间。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image022.jpg" alt="img"></p>
 <p><strong>5、</strong>路由环路的解决方案：<strong>触发更新</strong></p>
 <p>  路由表发生变化时，路由器发送更新。</p>
-<p><img src="file:///C:%5CUsers%5CADMINI~1%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image024.jpg" alt="img"></p>
 <p>小结：在RIP中解决路由环路的办法有<strong>定义最大跳数；水平分割；路由毒化与毒性逆转；抑</strong></p>
 <p><strong>制计时器；触发更新。</strong></p>
-<p>七、RIP路由协议的版本</p>
-<p>RIP v1</p>
+<h4 id="七、RIP路由协议的版本"><a href="#七、RIP路由协议的版本" class="headerlink" title="七、RIP路由协议的版本"></a>七、RIP路由协议的版本</h4><p><strong>RIP v1</strong></p>
 <p>​     发送路由更新时不携带子网掩码，宣告主类网络，属于有类路由协议</p>
 <p>​     发送路由更新时，目标地址为广播地址：255.255.255.255</p>
-<p>RIP v2</p>
+<p><strong>RIP v2</strong></p>
 <p>发送路由更新时携带子网掩码，属于无类路由协议</p>
 <p>发送路由更新时，目标地址为组播地址：224.0.0.9</p>
-<p>八、手动汇总</p>
-<p>开启RIP协议：R1(config)#router rip </p>
+<h4 id="八、手动汇总"><a href="#八、手动汇总" class="headerlink" title="八、手动汇总"></a>八、手动汇总</h4><p>开启RIP协议：R1(config)#router rip </p>
 <p>关闭自动汇总：R1(config-router)#no auto-summary </p>
 <p>进入se0/0（出口）接口：R1(config)#interface se0/0</p>
 <p>在接口下进行汇总：R1(config-if)#ip summary-address rip 172.16.0.0 255.255.252.0</p>
@@ -197,26 +173,8 @@
 
 
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/CVE-2019-0708/">CVE-2019-0708</a><small>0</small></li>
-  
-    <li><a href="/tags/系统安全/">系统安全</a><small>0</small></li>
-  
-  </ul>
-</div>
-
 
   
-<div class="widget tagcloud">
-  <h3 class="title">Tag Cloud</h3>
-  <div class="entry">
-    
-  </div>
-</div>
-
 </aside>
     <div class="clearfix"></div>
   </div>
