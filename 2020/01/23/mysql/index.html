@@ -1,0 +1,573 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>网络基础</title>
+  <meta name="author" content="Wenpeng Huang">
+
+  
+  <meta name="description" content="● 数据库概念和Mysql使用● SQL数据查询操作● 数据库增删改操作">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="网络基础">
+
+  
+  
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="网络基础" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">网络基础</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-23T06:45:06.369Z"><a href="/2020/01/23/mysql/">2020-01-23</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="●-数据库概念和Mysql使用"><a href="#●-数据库概念和Mysql使用" class="headerlink" title="● 数据库概念和Mysql使用"></a>● 数据库概念和Mysql使用</h2><h2 id="●-SQL数据查询操作"><a href="#●-SQL数据查询操作" class="headerlink" title="● SQL数据查询操作"></a>● SQL数据查询操作</h2><h2 id="●-数据库增删改操作"><a href="#●-数据库增删改操作" class="headerlink" title="● 数据库增删改操作"></a>● 数据库增删改操作</h2><a id="more"></a>
+
+<h2 id="●-数据库概念和Mysql使用-1"><a href="#●-数据库概念和Mysql使用-1" class="headerlink" title="● 数据库概念和Mysql使用"></a>● 数据库概念和Mysql使用</h2><p><strong>一、数据库相关概念</strong></p>
+<p>Data、Database（DB）、DBMS、DBS、DBA</p>
+<p><strong>二、SQL:</strong> <strong>结构化查询语言</strong></p>
+<p>SQL分类：</p>
+<p> 数据定义语言 ：DDL（针对数据库对象）:create-创建、alter-修改、drop-删除</p>
+<p> 数据操纵语言 ：DML（针对数据信息）:insert-插入、update-更新、delete-删除</p>
+<p> 数据查询语言 ：DQL（针对数据信息）：select-查询</p>
+<p> 数据控制语言 ：DCL（针对用户）：grant-授权、revoke-回收</p>
+<p><strong>三、服务及连接操作</strong></p>
+<p><strong>1、</strong>启动/关闭服务</p>
+<p>启动指定服务：net start 服务名</p>
+<p>关闭指定服务：net stop 服务名</p>
+<p><strong>2、</strong>连接服务</p>
+<p>mysql -u 用户名  -p    -h   -P</p>
+<p>   user   password host  port</p>
+<p>默认用户名为：root，用户名为mysql数据库user表中user、host字段的组合，如果host字段值为%，则不需要书写，其他则如<a href="mailto:test@172.168.0.4" target="_blank" rel="noopener">test@172.168.0.4</a></p>
+<p><strong>3、</strong>查看所有数据库</p>
+<p>show databases;</p>
+<p><strong>4、</strong>使用数据库（表示后期操作都针对该数据库进行）</p>
+<p>use 数据库名;</p>
+<p><strong>5、</strong>查看指定数据库下边所有数据表</p>
+<p>show tables;</p>
+<p><strong>四、用户管理</strong></p>
+<p><strong>1、</strong>创建用户</p>
+<p>法一：创建用户（同时设置密码）</p>
+<p>语法：create user  用户名称 [identified by ‘密码’];</p>
+<p>法二：创建用户同时分配权限</p>
+<p>语法：grant 权限 on 范围 to 用户 identified by ‘密码’;</p>
+<p><strong>2、</strong>删除用户</p>
+<p>语法：drop user 用户名;</p>
+<p>说明：</p>
+<p>A、<a href="mailto:ceshi@192.168.1.2" target="_blank" rel="noopener">ceshi@192.168.1.2</a>表示“ceshi”用户可通过IP为“192.168.1.2”的地址访问指定数据库服务器</p>
+<p>B、<a href="mailto:ceshi@192.168.1" target="_blank" rel="noopener">ceshi@192.168.1</a>.%表示“ceshi”用户可通过IP为“192.168.1.0”至“192.168.1.255”之间的地址访问指定数据库服务器</p>
+<p>C、create user c identified by ‘111’;</p>
+<p>上边语句创建用户c对应的host地址为“%”</p>
+<p><strong>3、</strong>更改密码</p>
+<p>A、更改指定用户密码</p>
+<p>语法：set  password  for  用户名=password(‘密码’);</p>
+<p>B、更改自己的登录密码</p>
+<p>语法：set password=password(‘密码’)；</p>
+<p><strong>五、权限管理</strong></p>
+<p><strong>1、</strong>授权</p>
+<p>语法：grant 权限 on 范围 to 用户 [with grant option];</p>
+<p>说明：如果在授权语句中出现with grant option，代表被授权的用户可将自己的权限授予给别人</p>
+<p><strong>2、</strong>回收</p>
+<p>语法：revoke 权限 on 范围 from 用户;</p>
+<p><strong>3、</strong>刷新权限机制</p>
+<p>flush privileges;</p>
+<p> A、权限作用范围及分类</p>
+<p>①  全局权限Global Privileges</p>
+<p>它是管理权限，作用到服务器上的所有数据库。要授予全局权限，使用 ON <em>.的语法，.</em>表示所有数据库的所有表（对象，视图等）中。MySQL 把全局权限保存在 mysql.user 表中</p>
+<p>②  数据库权限Database Privileges</p>
+<p>作用到某个特定数据库的所有对象上。要授予数据库权限，使用 ON db_name.* 的语法，db_name.*表示db_name数据库下的所有表（对象，视图等）。 MySQL 把数据库权限保存在 mysql.db 表中</p>
+<p>③  表权限Table Privileges</p>
+<p>应用到某个特定表的所有列上。要授予表权限，使用 ON db_name.tbl_name 的语法。 MySQL 把表权限保存在 mysql.tables_priv 表中</p>
+<p>④  列权限</p>
+<p>权限操作分类： 使用逗号分隔</p>
+<p>◆ 列权限</p>
+<p>作用在特定表的特定列上，在权限操作分类中体现列权限 select（col_name），记录到mysql.columns_prive表中 field</p>
+<p>◆ 存储过程权限</p>
+<p>作用在存储过程和函数上，记录到mysql.procs_prive表中 procedure</p>
+<p>◆ 代理用户权限</p>
+<p>作用是使一个用户成为另一个用户的代理，记录到mysql.proxies_priv表中 proxy</p>
+<p>B、查看用户当前权限</p>
+<p>语法：show grants for 用户名;</p>
+<p><strong>六、建库建表</strong></p>
+<p>注意：在SQL语法中，[]表示可有可无</p>
+<p><strong>1、</strong>创建数据库语法：create database 数据库名;</p>
+<p><strong>2、</strong>创建表语法：create table 表名(</p>
+<p>​         字段名 字段类型(长度) …</p>
+<p>);</p>
+<p><strong>3、</strong>MySQL数据类型</p>
+<p>​    ①数值型</p>
+<p>​        ◆整型（tinyint，smallint，mediumint， int，bigint）</p>
+<p>​        ◆ 浮点型（float，double）</p>
+<p>​        ◆ 定点型（decimal）</p>
+<p>​    ② 字符型（char，varcharl blob，textl enum（多选一），set（多选多））</p>
+<p>​    ③ 日期和时间类型（date，time，datetime，timestamp，year）</p>
+<p><strong>4、</strong>字段属性unsigned、zerofill的用法！！！</p>
+<p>​    ①  unsigned 为非负数，用此类型可以增加存储数值范围! </p>
+<p>​    ②  zerofill属性，在数字长度不够的数据前面填充0，以达到设定的长度</p>
+<p><strong>六、插入语句</strong></p>
+<p>语法：inset into 表名[(字段1[,字段2,…])] values(值1,值2,…);</p>
+<p>注意：</p>
+<p>1、 如果针对表中所有字段添加数据，可省略字段列表</p>
+<p>2、 字段列表不是表中所有字段时，非空、无默认值的字段必须出现</p>
+<p>3、 值列表与字段列表必须一一对应（数量、数据类型）</p>
+<p>4、 对于字段列表中有允许为空字段，其值可使用default或null替代</p>
+<p>5、 对于字段列表中有默认值字段，其值可使用default替代</p>
+<p>强调：针对字符、日期和时间类型对应的数据值，在SQL语句中须使用英文单引号括起来！</p>
+<p><strong>七、更新语句</strong></p>
+<p>语法：update 表名 set字段1=值1[,字段2=值2,…] [where 条件表达式];</p>
+<p>注意：在update语句中，如果没有出现where子句，则表示针对表中所有数据进行更新操作；如果表中出现where子句，则必须先根据条件表达式筛选数据，再行更新操作</p>
+<p><strong>八、注释</strong></p>
+<p>1、SQL标准注释方式：</p>
+<p>​    ◆ 单行注释：– 注释内容（提醒：在第二个中横线后打一空格，再添加注释内容方有效）</p>
+<p>​    ◆ 多行注释：/<em>注释内容</em>/</p>
+<p>2、MySQL注释方式：</p>
+<p>​    ◆ #注释内容</p>
+<h2 id="●数据库增删改操作"><a href="#●数据库增删改操作" class="headerlink" title="●数据库增删改操作"></a>●数据库增删改操作</h2><p><strong>一、自动递增（auto_increment）</strong></p>
+<p>◆ auto_increment是数据列的一种属性，只适用于数字类型</p>
+<p>◆ auto_increment对应数据列必须具备not null</p>
+<p>◆ 一个表只能有一个字段使用auto_increment</p>
+<p>◆ 将字段设置成auto_increment之后，是需要将其设置成主键/或者主键的一部分</p>
+<p>◆ 用户添加数据时，该字段的值可不用添加</p>
+<p>◆ 可在建表时可用auto_increment =n选项来指定一个自增的初始值</p>
+<p>◆ 可用alter table 表名 auto_increment =n命令来重设自增的起始值，默认的起始值、步长均是1</p>
+<p><strong>二、enun、set的应用</strong></p>
+<p><strong>1、</strong>enum：枚举字符串（多选一）</p>
+<p>◆ 将可能出现的数据列举出来，实际存储的数据只能是列举出来的数据</p>
+<p>◆ 使用枚举有利于统一数据，以及节省存储空间（枚举只是存储数值，系统转换成字符串）</p>
+<p>◆ 枚举元素实际上按定义的顺序标号，从1开始，所以可以直接插入枚举元素对应的数值</p>
+<p>◆ enum的选项对应一个数字，依次是1，2，3，4，5…，最多有65535个选项</p>
+<p>如：enum(‘a’,’b’,’c’)，如果某行的对应值为2，则选中了“b”</p>
+<p><strong>2、</strong>set：集合字符串（多选多）</p>
+<p>◆ 定义了集合之后，不能插入集合元素之外的字符串，（可以插入多个符合条件的字符串）</p>
+<p>◆ 集合字符串实际上也是仅仅存储数值，系统自动转换成对应的字符串</p>
+<p>◆ 集合中每一个元素对应一个二进制位，被选中的为1，没选中的为0，左边为二进制中的低位，右边为高位，从右到左得到二进制结果</p>
+<p>◆ set的每个选项值对应一个数字，依次是1，2，4，8，16…，最多有64个选项</p>
+<p>如：set(‘a’,’b’,’c’)，如果某行的对应值为5，二进制表示为：101（22+0+20=5），则选中了“a,c”</p>
+<p><strong>三、另类的insert</strong></p>
+<p><strong>1、</strong>一条语句插入多条数据值</p>
+<p>语法：insert into 表名(字段列表) values(值列表1),(值列表2),…</p>
+<p><strong>2、</strong>insert…select…（须先创建目标表）</p>
+<p>语法：insert  into 表名[(字段列表)]  select 字段列表 from 表名;</p>
+<p>注意：两处字段列表数量须一致，且数据类型能兼容</p>
+<p><strong>3、</strong>create…select…（插入数据前自动根据源表所选字段构建目标表）</p>
+<p>语法：create table 表名 select 字段列表 from 表名;</p>
+<p><strong>四、数据表的更改</strong></p>
+<p>删除外键约束：alter table b drop foreign key fk_no_id;</p>
+<p>删除主键：alter table drop primary key;</p>
+<p>删除unique：alter table drop index username；</p>
+<p>添加字段:  alter table  add userpassword varchar(20) not null;</p>
+<p>删除字段：alter table a drop userpassword;</p>
+<p>更改字段属性：alter table  a modify  userpassword varchar(30) not null;</p>
+<p><strong>五、约束</strong></p>
+<p><strong>1</strong>、数据完整性：是指存储在数据库中的数据的一致性和正确性。</p>
+<p><strong>2</strong>、约束（constraint）是通过限制列中的数据、行中的数据和表之间数据来保证数据完整性的非常有效的方法。</p>
+<table>
+<thead>
+<tr>
+<th>完整性类型</th>
+<th>约束类型</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>域完整性  （针对表中字段进行约束）</td>
+<td>not null(非空)</td>
+<td>指定某列不为空</td>
+</tr>
+<tr>
+<td>default(缺省)</td>
+<td>指定某一个列中的默认数值</td>
+<td></td>
+</tr>
+<tr>
+<td>实体完整性  （针对表中记录/数据进行约束）</td>
+<td>primary key(主键)</td>
+<td>每一行的惟一标识符，确保用户不能输入  冗余值和确保创建索引，提高性能，不允  许空值</td>
+</tr>
+<tr>
+<td>unique(唯一)</td>
+<td>防止出现冗余值，并且确保创建索引，提  高性能；允许空值，但字段中的数据值不能出现重复</td>
+<td></td>
+</tr>
+<tr>
+<td>引用完整性  （针对表与表之间的约束）</td>
+<td>foreign key(外键)</td>
+<td>定义一列或者几列，其值与本表或者另外  一个表的主键/唯一键值匹配</td>
+</tr>
+</tbody></table>
+<p><strong>3</strong>、约束示例</p>
+<p>◆ <strong>创建表时创建约束</strong></p>
+<p>◆ <strong>表存在后创建约束——实质是对表结构进行修改</strong></p>
+<p><strong>六、删除语句</strong></p>
+<p>使用delete语句删除表中的记录（数据），可以删除指定的行或同时删除所有的行。</p>
+<p><strong>语法：delete from</strong> <strong>表名  [where</strong> <strong>条件表达式];</strong></p>
+<p><strong>逻辑运算符：与(and)、或(or)、非（not）</strong></p>
+<table>
+<thead>
+<tr>
+<th>not（非）</th>
+<th>如果原来条件返回true，在其之前使用not之后则返回false。如果原来条件返回false，在其之前使用not之后则返回true。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>and（与）</td>
+<td>and运算符可以连接两个或两个以上的条件，只有当and连接的条件都为true（真）时，and返回的结果才是true（真）。如果其中有一个条件为false（假），and返回的值就是false（假）。</td>
+</tr>
+<tr>
+<td>or（或）</td>
+<td>or运算符连接的条件中只要有一个条件为true时，or返回的结果就是true。当然两个条件均为true时，or返回的结果当然是true。</td>
+</tr>
+</tbody></table>
+<p><strong>语法：truncate table 表名;</strong></p>
+<p><strong>补充：delete与truncate的区别</strong></p>
+<p>◆ delete会记录日志，意味着删除后的数据还可以恢复，但是效率低。</p>
+<p>◆ truncate不会记录日志，删除后的数据不能恢复，但是效率高；truncate不能用于有外键约束引用的表。</p>
+<p>truncate应用场景：如果是开发一个应用程序，开始可能使用的是测试数据，当应用开发成功后，需要将真正的数据导入到数据表中，为了使自增主键从1开始，使用truncate操作数据表比较方便。</p>
+<p><strong>注意：</strong>在表中的操作绝大部分都是记录在案的（日志），数据库实质是通过文件来存储（数据文件、日志文件）</p>
+<p><strong>如果删除数据涉及外键引用则须注意</strong>：当主表的记录被从表参照时，主表的记录将不允许删除，如果要删除数据，需要先删除从表中依赖该记录的数据， 然后才可以删除主表的数据。（设置级联操作除外</p>
+<p>补充：</p>
+<p>◆ <strong>语法：desc</strong>  <strong>表名;–</strong> <strong>查看指定表结构</strong></p>
+<p>desc A；#语句执行结果如下所示</p>
+<p>◆ <strong>show  create  table</strong>  <strong>表名;–</strong> <strong>查看指定表定义语句</strong></p>
+<p>​                 </p>
+<h2 id="●-数据查询操作"><a href="#●-数据查询操作" class="headerlink" title="● 数据查询操作"></a>● <strong>数据查询操作</strong></h2><p><strong>1 、检索表中所有数据信息</strong></p>
+<p>select * from 表名;# *表示表中所有字段</p>
+<p><strong>2、检索表中部分字段信息</strong></p>
+<p>select 字段1,字段2,… from 表名;</p>
+<p><strong>3、列重命名</strong></p>
+<p>select 字段 [as] ‘别名’ from 表名;– 建议保留as关键字</p>
+<p>select cName as ‘课程名称’ from Courses;</p>
+<p>select cName ‘课程名称’ from Courses;</p>
+<p><strong>4、排序（order by）</strong></p>
+<p>select 字段列表 from 表名</p>
+<p>order by 字段1 [asc]|desc[,字段2 [asc]|desc,…];</p>
+<p>说明：</p>
+<p>A、排序方式包含asc（升序，由小到大，默认值）、desc（降序，由大到小）</p>
+<p>B、可根据多个字段排序，但是每个字段有其自身排序方式，如果出现多个字</p>
+<p>段排序，后者是在前者出现重复值的情况下有意义）</p>
+<p>C、order by子句出现在where子句的后边（如果有where子句的话）</p>
+<p>D、聚合函数可以作为排序依据，如order by count(字段) desc</p>
+<p>select * from elogs order by elScore desc;</p>
+<p>分析下边语句的作用</p>
+<p>select * from Teachers order by tAge desc,tNo desc;</p>
+<p>select * from Courses order by cName;#因为编码问题可能达不到想要的结果</p>
+<p>#因为当前数据库语言设置为utf8，使用中文字段排序则须进行编码更改</p>
+<p>select * from Courses order by convert(cName using gbk);</p>
+<p><strong>5、取多少条数据（limit）</strong></p>
+<p>#select 字段列表 from 表名 limit [m,]n;</p>
+<p>注意：</p>
+<p>1、limit关键字后只有一个数字n时，表示取前n条数据（此时m=0）</p>
+<p>2、limit关键字后有两个数m,n时,表示从m+1行开始读取n条数据（常用于分页数据读取）</p>
+<p>查询学生信息表中前五条数据</p>
+<p>select * from Students limit 5;</p>
+<p>select * from Students limit 0,5;</p>
+<p>select * from Students limit 5,5;#6~10</p>
+<p>任务：检索年龄最小的五位男老师信息</p>
+<p>select * from Teachers where tGender=’男’ order by tAge limit 5;</p>
+<p>查找年龄最大的老师？—年龄最大的不止一位老师的时候！！！</p>
+<p>思路：</p>
+<p>第一步：找到教师信息表中最大的年龄值</p>
+<p>第二步：在教师信息表中找到与年龄最大值相同年龄的老师信息</p>
+<p>法一：</p>
+<p>select * from Teachers where tAge=(</p>
+<p> select tAge from Teachers order by tAge desc limit 1</p>
+<p>);</p>
+<p>法二：</p>
+<p>select * from Teachers where tAge=(</p>
+<p> select max(tage) from Teachers – max(字段名)：获取该字段数据中的最大值</p>
+<p>);</p>
+<p>重点提醒：聚合函数不能直接出现在where子句中！！！</p>
+<p>select * from Teachers where tAge=max(tage);#错误的</p>
+<p><strong>6、聚合函数</strong></p>
+<p>max(字段名):返回指定字段的最大值</p>
+<p>min(字段名):返回指定字段的最小值</p>
+<p>avg(字段名):返回指定字段的平均值，只能针对数值型</p>
+<p>sum(字段名):返回指定字段的和值，只能针对数值型</p>
+<p>count():返回结果集的信息条数</p>
+<p>count(*)</p>
+<p>count(1)</p>
+<p>count(主键字段)</p>
+<p>count(非主键字段)</p>
+<p>注意：</p>
+<p>1、max(字段)、min(字段)、avg(字段)、sum(字段)、count(非主键字段)在统计时</p>
+<p>自动排除字段值中的null值</p>
+<p>2、count(*)、count(1)、count(主键字段)返回表中所有符合条件的信息数目</p>
+<p>3、avg(字段)、sum(字段)在统计字符字段时，返回值为0</p>
+<p>4、聚合函数不能直接嵌套使用</p>
+<p>5、聚合函数不能直接出现在where子句中</p>
+<p> 统计选修记录信息表中，记录信息的数量及考试成绩的平均分</p>
+<p>select count(*),count(1),count(elno),count(elscore),avg(elscore) from elogs;</p>
+<p>select avg(cName),sum(cName),max(cName),min(cName) from Courses;</p>
+<p>#select max(count(cid)) from elogs;– 错误的</p>
+<p><strong>7、取消重复值（distinct）</strong></p>
+<p>#结果集中重复的数据值只会出现一次</p>
+<p>select distinct tage from teachers;</p>
+<p>练习：</p>
+<p>查询选修考试成绩中，课程编号为2的前十名同学学号及成绩信息</p>
+<p>select sid,elscore from elogs where cid=’2’ </p>
+<p>  order by elscore desc limit 10;</p>
+<p>统计课程编号为00002的考试有多少学生未参考（考试成绩为空表示未参考）</p>
+<p>select count(*) from elogs where elscore is null and cid=’00002’;</p>
+<p>select count(*)-count(elscore) from elogs where cid=’00002’;</p>
+<p>select * from elogs;</p>
+<p>查看课程编号为00002，考试成绩为60、70、80、90、100的学生学号 </p>
+<p>select sid from elogs where elscore in (60,70,80,90,100)</p>
+<p> and cid=’00002’;</p>
+<p>查询参与了选修的同学学号有哪些？</p>
+<p>select distinct sid from elogs;</p>
+<p>查询参与了选修的同学姓名</p>
+<p>explain select sName from Students where sno in ( </p>
+<p>  select sid from elogs</p>
+<p>);</p>
+<p>desc select sName from Students as S where exists(</p>
+<p>  select sid from elogs  where sid=S.sno</p>
+<p>);</p>
+<p><strong>8、子查询</strong></p>
+<p>子查询是指一个查询语句嵌套在另一个查询语句内部的查询</p>
+<p>子查询（内层）结果作为外层SQL操作的过滤条件</p>
+<p>子查询可以添加到select、update、delete语句中</p>
+<p>子查询可进行多次嵌套</p>
+<p>子查询类型</p>
+<p>◆ 带比较运算符的子查询</p>
+<p>◆ 带in关键字的子查询</p>
+<p>◆ 带exists关键字的子查询</p>
+<p>◆ 带any/some关键字的子查询</p>
+<p>◆ 带all关键字的子查询</p>
+<p>外部数据大于内部数据，使用in</p>
+<p>内部数据大于外部数据，使用exists</p>
+<p>in子查询：</p>
+<p>select 字段列表  from  表A where 表A.字段 in(</p>
+<p>  select 表B.字段 from 表B</p>
+<p>);</p>
+<p>exits子查询：</p>
+<p>select 字段列表  from  表A where exists(</p>
+<p>  select 主键字段 from 表B where 表B.字段=表A.字段</p>
+<p>);</p>
+<p>注意：</p>
+<p>1、表A.字段与表B.字段有主外关联为佳</p>
+<p>2、exists子查询中内部语句的where条件表达式是两表对应字段</p>
+<p>#exists根据子句返回是否有结果（有数据返回，则exists返回真；否则返回假），以确定其前面的select语句是否需要执行</p>
+<p>select * from Students where exists(select * from elogs);</p>
+<p>select * from Students where exists(select * from elogs where cid=’1’);</p>
+<p><strong>9、合并结果集union</strong></p>
+<p>默认将结果集中的重复值取消，如果不想取消重复值，则在union的后边增加all</p>
+<p>select tName from Teachers</p>
+<p>union all</p>
+<p>select cName from Courses;</p>
+<p><strong>10、连接技术</strong></p>
+<p>连接技术：通过方法将两个及以上的表关联在一起（逻辑上看成一个表来操作）</p>
+<p>内连接：inner join</p>
+<p>语法：select 字段列表 from 表1 inner join 表2 on 表1.主键字段=表2.外键字段 [where 条件表达式];– 建议</p>
+<p>或</p>
+<p>   select 字段列表 from 表1,表2[,…] where 表1.主键字段=表2.外键字段 [and 条件表达式]</p>
+<p>说明：呈现多表中能匹配的数据（有条件表达式存在则再筛选）</p>
+<p>外连接：outer join</p>
+<p>​    左外连接：left outer join/left join     </p>
+<p>​    语法：select 字段列表 from 表1 left join 表2 on 表1.主键字段=表2.外键字段 [where 条件表达式];</p>
+<p>​    说明：以左表（left join左边的表）为基表呈现数据，右表中无对应匹配的数据则以null呈现（有条件表达式存在则再筛选）</p>
+<p>​    右外连接：right outer join/right join    </p>
+<p>​    语法：select 字段列表 from 表1 right join 表2 on 表1.主键字段=表2.外键字段 [where 条件表达式];</p>
+<p>​    说明：以右表（right join右边的表）为基表呈现数据，左表中无对应匹配的数据则以null呈现（有条件表达式存在则再筛选）</p>
+<p>问题：统计《计算机网络基础》这门课程缺考的同学有多少</p>
+<p>select count(*) from ELogs where elScore is null and cID=?</p>
+<p>select cNo from Courses where cName=’计算机网络基础’;</p>
+<p>内连接（两表连接）</p>
+<p>select count(*) from ELogs as E inner join Courses as C on C.cNo=E.cID where cName=’计算机网络基础’;</p>
+<p>子查询</p>
+<p>select count(sID) from eLogs where elScore is null and cID =(select cNo from Courses where cName=’计算机网络基础’);</p>
+<p>问题：老张老师上了哪些课</p>
+<p>分析：牵涉到两个表，分别是教师信息表（Teachers）、课程信息表（Courses）</p>
+<p>   Teachers、Courses存在主外关联（Courses.tID——&gt;Teachers.tNo）</p>
+<p>   本次查询的是课程名称(cName)</p>
+<p>   本次涉及的条件是：老张老师参与授课(tName=’老张’)</p>
+<p>select cName from Courses inner join Teachers on tNo=tID where TName=’老张’;</p>
+<p>问题：查看选修了《C语言》这门课程的学生姓名</p>
+<p>分析：牵涉到三个表，分别是学生信息表（Students）、课程信息表（Courses）、选修记录信息表（ELogs）</p>
+<p>   Students、ELogs存在主外关联（ELogs.sID——&gt;Students.sNo）</p>
+<p>   Courses、ELogs存在主外关联（ELogs.cID——&gt;Courses.cNo）</p>
+<p>   本次要查询的是：学生姓名（sName）</p>
+<p>   本次涉及的条件是：选修过《C语言》这门课程（cName=’C语言’）</p>
+<p>内连接（三表连接）</p>
+<p>select sName from Students inner join ELogs inner join Courses where sNO=sID and cNo=cID and cName=’C语言’;</p>
+<p>问题：查看未进行选修的学生姓名</p>
+<p>分析：未选修则表示：选修记录信息表中无这些学生学号的存在</p>
+<p>   学生姓名在学生信息表中，而选修涉及选修记录信息表</p>
+<p>   但此题并不是多表之间匹配数据的涉及，故不使用内连接解决</p>
+<p>   可考虑使用子查询 或 外连接技术实现</p>
+<p>子查询</p>
+<p>select sName from Students where sNo not in(</p>
+<p>  select distinct sID from  ELogs</p>
+<p>);</p>
+<p>– 左外连接</p>
+<p>select sName from Students left join ELogs on sNo=sID where elNO is null;</p>
+<p>– 右外连接</p>
+<p>select sName from ELogs right join Students on sNo=sID where elNO is null;</p>
+<p><strong>11、分组技术</strong></p>
+<p>#语法：select 字段列表 from 表名 [where 条件表达式] group by 字段1[,字段2,…] [having 条件表达式] [order by 字段列表]</p>
+<p>统计在选修记录信息表中，已登记同学每人选修课程门数</p>
+<p>select * from ELogs</p>
+<p>select count(*) from ELogs group by sID;</p>
+<p>查询已登记的每位学生姓名及其选修课程数目</p>
+<p>select sID,count(*) from ELogs group by sID;</p>
+<p>连接技术实现</p>
+<p>– select * from ELogs inner join Students on sNo=sID;</p>
+<p>select sName,count(*) from ELogs inner join Students on sNo=sID  group by sID;</p>
+<p>子查询技术实现</p>
+<p>select (select sName from Students where sNo=sID),count(*) from ELogs group by sID;</p>
+<p>应用group_concat()函数将指定字段（课程编号）以列表形式呈现在结果集内（就是所选课程的编号）</p>
+<p>select sName,count(*),group_concat(cID) from ELogs inner join Students on sNo=sID  group by  sID;</p>
+<p>select sName,count(*),group_concat(cName) from ELogs inner join Students on sNo=sID</p>
+<p> inner join Courses on cNO=cID  group by sID;</p>
+<p>查询已登记的张姓同学的姓名及其选修课程数目</p>
+<p>– 建议使用where进行数据的先行筛选再分组</p>
+<p>select sName,count(*),group_concat(cName) from ELogs inner join Students on sNo=sID</p>
+<p> inner join Courses on cNO=cID  where sName like ‘张%’ group by sID;</p>
+<p>select sName,count(*),group_concat(cName) from ELogs inner join Students on sNo=sID</p>
+<p> inner join Courses on cNO=cID  group by sID having sName like ‘张%’;</p>
+<p>查询已登记的张姓同学的姓名及其选修课程数目，且选修课程门数必须大于三门才能呈现</p>
+<p>select sName,count(*),group_concat(cName) from ELogs inner join Students on sNo=sID</p>
+<p> inner join Courses on cNO=cID  where sName like ‘张%’ group by sID having count(*)&gt;3;</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/01/23/LAMP,LNMP/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/23/iptables/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/23/mysql/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/路由重分布/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/IDS,IPS/"></a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 Wenpeng Huang
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>网络基础</title>
+  <meta name="author" content="Wenpeng Huang">
+
+  
+  <meta name="description" content="● LAMP环境的搭建● 搭建nginx网站服务器">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="网络基础">
+
+  
+  
+
+  
+    <meta property="og:image" content>
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/atom.xml" title="网络基础" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">网络基础</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-01-23T08:01:26.622Z"><a href="/2020/01/23/LAMP,LNMP/">2020-01-23</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="●-LAMP环境的搭建"><a href="#●-LAMP环境的搭建" class="headerlink" title="● LAMP环境的搭建"></a>● LAMP环境的搭建</h2><h2 id="●-搭建nginx网站服务器"><a href="#●-搭建nginx网站服务器" class="headerlink" title="● 搭建nginx网站服务器"></a>● 搭建nginx网站服务器</h2><a id="more"></a>
+
+
+
+<h2 id="●-LAMP环境的搭建-1"><a href="#●-LAMP环境的搭建-1" class="headerlink" title="● LAMP环境的搭建"></a>● LAMP环境的搭建</h2><h4 id="安装apache服务器"><a href="#安装apache服务器" class="headerlink" title="安装apache服务器"></a>安装apache服务器</h4><p>使用YUM安装，首先需要配置YUM源</p>
+<p>1、配置YUM源文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d/</span><br></pre></td></tr></table></figure>
+
+<p>备份系统默认的YUM源文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir bak</span><br><span class="line">mv *.repo bak</span><br></pre></td></tr></table></figure>
+
+<p>配置本地源</p>
+<p> 步骤一：加载系统光盘</p>
+<p> 步骤二：在/mnt/目录下建立一个文件夹:cdrom</p>
+<p> 步骤三：将光盘挂载到cdrom目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount -t iso9660 /dev/sr0 /mnt/cdrom</span><br><span class="line">vim /etc/fstab </span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+
+<p>步骤四：配置yum源文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> vim dvd.repo</span><br><span class="line"> [media]</span><br><span class="line">name=CentOS7</span><br><span class="line">baseurl=file:///mnt/cdrom</span><br><span class="line">enabled=1</span><br><span class="line">gpgchck=0</span><br></pre></td></tr></table></figure>
+
+<p>步骤五：检查yum源是配置成功</p>
+<p>1、安装apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# yum install httpd httpd-devel</span><br></pre></td></tr></table></figure>
+
+<p>2 、启动apache服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# systemctl start  httpd</span><br></pre></td></tr></table></figure>
+
+<p>3、设置httpd服务开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start httpd   </span><br><span class="line">systemctl stop httpd</span><br><span class="line">systemctl status httpd</span><br><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+
+<p>4、查看服务状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# systemctl status httpd</span><br></pre></td></tr></table></figure>
+
+<p>5、防火墙设置开启80/443端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# firewall-cmd --permanent --zone=public  --add-service=http</span><br><span class="line">success</span><br><span class="line">[root@nmserver-7 ~]# firewall-cmd --permanent --zone=public  --add-service=https</span><br><span class="line">success</span><br><span class="line">[root@nmserver-7 ~]# firewall-cmd --reload</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p>6、备注</p>
+<p>网站存放的默认目录：/var/www/html/index.html</p>
+<p>修改配置文件：vim /etc/httpd/conf/httpd.conf</p>
+<p>DocumentRoot “/var/www/html” 改为存放网页的目录</p>
+<h4 id="安装DNS服务器"><a href="#安装DNS服务器" class="headerlink" title="安装DNS服务器"></a>安装DNS服务器</h4><p>1、安装DNS服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install bind -y</span><br></pre></td></tr></table></figure>
+
+<p>2、DNS的配置</p>
+<p>（1）以创建一个名为”lsy.com”的正向查找区域为例：</p>
+<p>  第一步：在主配置文件/etc/named.conf中创建查找区域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/named.conf</span><br><span class="line">listen-on port 53&#123;any;&#125;;  允许任何用户使用DNS</span><br><span class="line">allow-query &#123;any;&#125;;   允许任何用户查询</span><br><span class="line">dnssec-enable no;    DNS的安全是否开启</span><br><span class="line">zone &quot;zlt.com.&quot; IN &#123;</span><br><span class="line">type master; 有三种类型：hint根 master主要区域 辅助区域</span><br><span class="line">file &quot;zlt.com.zone&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>第二步：在/var/named目录中生成区域配置文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">copy named.localhost zlt.com.zone  </span><br><span class="line">chown :named zlt.com.zone</span><br><span class="line">vim lsy.com.zone</span><br><span class="line">$TTL 1D              </span><br><span class="line">IN SOA zlt.com. root.gxa.com.(</span><br><span class="line">0  ;serial  是一个十位数字的序列号</span><br><span class="line">1D ;refresh 刷新时间 </span><br><span class="line">1H ；retry  重试时间 </span><br><span class="line">1W ；expire 过期时间</span><br><span class="line">3H ；minimum 最小缓存时间</span><br><span class="line">NS  dns.gxa.com. @部份填写域名</span><br><span class="line">dns A  192.168.0.1  A表示IPV4的地址 AAAA表示IPV6的地址</span><br><span class="line">www A  192.168.0.1</span><br><span class="line">ftp A  192.168.0.1</span><br></pre></td></tr></table></figure>
+
+<p>   第三步：重启服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start named.service</span><br><span class="line">systemctl enable named.service</span><br></pre></td></tr></table></figure>
+
+<p>第四步：配置客户端</p>
+<p>第五步：测试DNS服务器</p>
+<p> nslookup</p>
+<h4 id="安装mysql数据库"><a href="#安装mysql数据库" class="headerlink" title="安装mysql数据库"></a>安装mysql数据库</h4><p><strong>1、安装mysql</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# yum install mariadb mariadb-server mariadb-libs mariadb-devel</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@nmserver-7 ~]# rpm -qa |grep maria</span><br><span class="line">mariadb-libs-5.5.52-1.el7.i686</span><br><span class="line">mariadb-5.5.52-1.el7.i686</span><br><span class="line">mariadb-server-5.5.52-1.el7.i686</span><br><span class="line">mariadb-devel-5.5.52-1.el7.i686</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、 开启mysql服务，并设置开机启动，检查mysql状态</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# systemctl start  mariadb </span><br><span class="line">[root@nmserver-7 ~]# systemctl enable  mariadb</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、 数据库安全设置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# mysql_secure_installation</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、 登陆数据库测试</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# mysql -u root -p</span><br><span class="line">数据库的创建与使用</span><br><span class="line">1、数据库的操作</span><br><span class="line">1.1查看数据库</span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">1.2创建数据库：（创建的数据库会存放在/var/lib/mysql目录中）</span><br><span class="line">MariaDB [(none)]&gt; create database couman;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">1.3选择数据库</span><br><span class="line">MariaDB [(none)]&gt; use couman;</span><br><span class="line">Database changed</span><br><span class="line">1.4删除数据库</span><br><span class="line">MariaDB [(none)]&gt; drop database couman;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">    1.5查看数据表</span><br><span class="line">show tables;</span><br><span class="line">1.5查看表结构</span><br><span class="line">desc user;</span><br><span class="line">2、数据库的备份</span><br><span class="line">[root@teacher mnt]# mysqldump couman --user=root --password=123456&gt;db-01.mysql;</span><br><span class="line">3、数据库的恢复</span><br><span class="line">3.1首先创建一个空数据库存</span><br><span class="line">MariaDB [(none)]&gt; create database couman;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">3.2从备份文件中恢复数据库存</span><br><span class="line">[root@teacher mnt]# mysql -u root -p couman&lt;db-01.mysql</span><br><span class="line">Enter password:</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装PHP环境"><a href="#安装PHP环境" class="headerlink" title="安装PHP环境"></a>安装PHP环境</h4><p><strong>1、安装php</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# yum -y install php</span><br><span class="line">[root@nmserver-7 ~]# rpm -ql php/etc/httpd/conf.d/php.conf/etc/httpd/conf.modules.d/10-php.conf/usr/lib/httpd/modules/libphp5.so/usr/share/httpd/icons/php.gif/var/lib/php/session</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、将php与mysql关联起来</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# yum install php-mysql</span><br><span class="line">[root@nmserver-7 ~]# rpm -ql php-mysql/etc/php.d/mysql.ini/etc/php.d/mysqli.ini/etc/php.d/pdo_mysql.ini/usr/lib/php/modules/mysql.so/usr/lib/php/modules/mysqli.so/usr/lib/php/modules/pdo_mysql.so</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、安装常用PHP模块</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# yum install -y php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel php-bcmath</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、测试PHP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 ~]# cd /var/www/html/</span><br><span class="line"> [root@nmserver-7 html]# ls</span><br><span class="line"> [root@nmserver-7 html]# pwd</span><br><span class="line"> /var/www/html</span><br><span class="line"> [root@nmserver-7 html]# vi info.php</span><br><span class="line"> &lt;?php</span><br><span class="line">     phpinfo();</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、重启apache服务器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nmserver-7 html]# systemctl restart httpd</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、测试PHP</strong></p>
+<p>　　在自己电脑浏览器输入 192.168.8.9/info.php，你可以看到已经安装的模块。</p>
+<h2 id="●-搭建nginx网站服务器-1"><a href="#●-搭建nginx网站服务器-1" class="headerlink" title="● 搭建nginx网站服务器"></a>● 搭建nginx网站服务器</h2><p>项目简介：</p>
+<p>公司需要安装nginx服务器，发布项目考核信息平台网站和员工考勤网站。因此管理员需要在一台服务器上部署多个站点，为了方便今后公司内部网站的部署和管理，管理员采用基于域名的虚拟主机配置多个站点。</p>
+<p>项目分析：</p>
+<p>管理员需要在服务器上安装nginx并通过基于域名的虚拟主机方式布署多个网站。通过<a href="http://www.test.com访问项目考核信息平台网站，通过www.hr.com访问员工考勤网站。" target="_blank" rel="noopener">www.test.com访问项目考核信息平台网站，通过www.hr.com访问员工考勤网站。</a></p>
+<p>项目实施：</p>
+<p>1、检查网络环境，查看服务器是否可以上网</p>
+<p>2、Centos 7 配置阿里云 yum源和安装 EPEL源</p>
+<p>（1）对默认原文件进行备份</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d</span><br><span class="line">mkdr bak</span><br><span class="line">mv *.repo bak/</span><br></pre></td></tr></table></figure>
+
+<p>（2）配置阿里云yum源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<p>（3）安装 EPEL源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+
+<p>3、安装nginx并配置服务</p>
+<p>  （1）安装nginx服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#yum install nginx</span><br></pre></td></tr></table></figure>
+
+<p>主配置文件：# vim /etc/nginx/nginx.conf</p>
+<p>events模块：<a href="https://blog.csdn.net/zhangsheng_1992/article/details/51689980" target="_blank" rel="noopener">https://blog.csdn.net/zhangsheng_1992/article/details/51689980</a></p>
+<p>http模块：<a href="https://blog.csdn.net/chinabestchina/article/details/80993086" target="_blank" rel="noopener">https://blog.csdn.net/chinabestchina/article/details/80993086</a></p>
+<p>监听端口：80</p>
+<p>默认目录：/usr/share/nginx/html</p>
+<p>日志文件：error_log /var/log/nginx/error.log;</p>
+<p>​     error_log /var/log/nginx/access.log </p>
+<p>补充：日志格式分析</p>
+<p>安全加固：<a href="https://www.cnblogs.com/xiaozi/p/10119062.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaozi/p/10119062.html</a></p>
+<p>（2）修改nginx配置文件</p>
+<p>   #vim /etc/nginx/nginx.conf</p>
+<p>​    在文件最后一个}号前添加：include vhost/*.conf;</p>
+<p>（3）在/etc/nginx目录下新建vhost目录，并在下面新建<a href="http://www.test.conf与www.hr.conf两个" target="_blank" rel="noopener">www.test.conf与www.hr.conf两个</a></p>
+<p>域名配置文件，并作如下编辑。</p>
+<p>#vim <a href="http://www.test.conf" target="_blank" rel="noopener">www.test.conf</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">listen 192.168.75.131:80;</span><br><span class="line">server_name www.test.com;</span><br><span class="line">location / &#123;</span><br><span class="line">root /data/test;</span><br><span class="line">index index.html;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#vim <a href="http://www.hr.conf" target="_blank" rel="noopener">www.hr.conf</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">listen 192.168.75.131:80;</span><br><span class="line">server_name www.hr.com;</span><br><span class="line">location / &#123;</span><br><span class="line"> root /data/hr;</span><br><span class="line">index index.html;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（4）将公司网站文件test和hr都放到/data/目录下</p>
+<p>（5）配置完成后重启服务：systemctl restart nginx</p>
+<p>（6）关闭防火墙：systemctl status firewalld.service</p>
+<p>关闭selinux安全机制：setenforce 0</p>
+<p>4、配置基于域名的虚拟主机</p>
+<p>域名注册，在/etc/hosts中追加一行：</p>
+<p>192.168.75.128 <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a> <a href="http://www.hr.com" target="_blank" rel="noopener">www.hr.com</a></p>
+<p>5、网站访问测试</p>
+<p>  在浏览器分别输入<a href="http://www.test.com和www.hr.com测试公司是否能够访问" target="_blank" rel="noopener">www.test.com和www.hr.com测试公司是否能够访问</a></p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/01/23/LAMP,LNMP/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/23/iptables/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/23/mysql/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/路由重分布/"></a>
+      </li>
+    
+      <li>
+        <a href="/2020/01/22/IDS,IPS/"></a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 Wenpeng Huang
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>
